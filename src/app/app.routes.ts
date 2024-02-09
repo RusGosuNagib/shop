@@ -9,13 +9,14 @@ import { DashboardComponent } from "./admin/dashboard/dashboard.component";
 import { AddPageComponent } from "./admin/add-page/add-page.component";
 import { OrdersPageComponent } from "./admin/orders-page/orders-page.component";
 import { EditPageComponent } from "./admin/edit-page/edit-page.component";
+import {authGuard} from "./common/auth.guard";
 
 export const routes: Routes = [
   {
     path: '', component: MainLayoutComponent, children: [
       { path: '', component: MainPageComponent},
       { path: 'product/:id', component: ProductPageComponent },
-      { path: 'cart',  component: CartPageComponent}
+      { path: 'cart',  component: CartPageComponent},
     ]
   },
 
@@ -23,8 +24,8 @@ export const routes: Routes = [
     path: 'admin', component: AdminLayoutComponent, children: [
       {path: '', redirectTo: '/admin/login', pathMatch:'full'},
       {path: 'login', component: LoginPageComponent},
-      {path: 'dashboard', component: DashboardComponent},
-      {path: 'add', component: AddPageComponent},
+      {path: 'dashboard', component: DashboardComponent, canActivate: [authGuard]},
+      {path: 'add', component: AddPageComponent, canActivate: [authGuard]},
       {path: 'orders', component: OrdersPageComponent},
       {path: 'product/:id/edit', component: EditPageComponent},
     ]
