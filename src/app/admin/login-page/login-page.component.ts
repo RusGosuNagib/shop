@@ -3,6 +3,7 @@ import {FormGroup, FormControl, ReactiveFormsModule, Validators} from "@angular/
 import {CommonModule} from "@angular/common";
 import {AuthService} from "../../common/auth.service";
 import {Router} from "@angular/router";
+import {UserModel} from "../../models/user.model";
 
 @Component({
   selector: 'app-login-page',
@@ -32,7 +33,7 @@ export class LoginPageComponent implements OnInit {
       return;
     }
     this.submitted = true;
-    const user: object = {
+    const user: UserModel = {
       email: this.loginForm.value.email,
       password: this.loginForm.value.password,
       returnSecureToken: true,
