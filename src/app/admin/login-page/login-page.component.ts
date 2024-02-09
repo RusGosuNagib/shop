@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormGroup, FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 import {AuthService} from "../../common/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login-page',
@@ -14,7 +15,10 @@ export class LoginPageComponent implements OnInit {
   loginForm: FormGroup
   submitted = false
 
-  constructor(public auth: AuthService,) {
+  constructor(
+    public auth: AuthService,
+    private router: Router
+    ) {
   }
 
   ngOnInit() {
@@ -34,7 +38,12 @@ export class LoginPageComponent implements OnInit {
     }
     this.auth.login(user).subscribe(res => {
       console.log(res)
-    })
+      this.loginForm.reset()
+      this.router.navigate(['/admin', 'dashboard'])
+      this.submitted = false
+    }), () =>{
+      this.submitted = false
+    }
   }
 }
 
