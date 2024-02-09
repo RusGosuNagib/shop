@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 import {tap} from "rxjs";
+import {UserModel} from "../models/user.model";
 
 @Injectable({
   providedIn: 'root',
@@ -10,18 +11,18 @@ export class AuthService {
   private _firebaseUrl = `${environment.firebaseUrlPassAuth}${environment.apiKey}`
   constructor(private http: HttpClient) { }
 
-  login(user: object){
-    return this.http.post(this._firebaseUrl, user)
+  login(user: UserModel){
+    return this.http.post<UserModel>(this._firebaseUrl, user)
       .pipe(
         tap(this.setToken)
       )
   }
 
-  private setToken (response: object){
+  private setToken (response: UserModel){
     if (response){
-      const expiredDate = new Date(new Date().getTime() + +(<any>response).expiresIn * 1000)
+      const expiredDate = new Date(new Date().getTime() + +response.expiresIn * 1000)
       localStorage.setItem('fb-token-exp', expiredDate.toString())
-      localStorage.setItem('fb-token', (<any>response).idToken)
+      localStorage.setItem('fb-token', response.idToken)
     } else {
       localStorage.clear()
     }
@@ -35,6 +36,7 @@ export class AuthService {
     }
     return localStorage.getItem('fb-token');
   }
+
   logout(){
     this.setToken(null)
   }
