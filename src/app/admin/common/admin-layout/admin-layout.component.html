@@ -1,0 +1,29 @@
+<nav class="navbar bg-dark">
+  <h2>Админ</h2>
+  <ul>
+    <li routerLinkActive="active">
+      <a routerLink="/admin/dashboard">dashboard</a>
+    </li>
+
+    <li routerLinkActive="active">
+      <a routerLink="/admin/add">add</a>
+    </li>
+
+    <li routerLinkActive="active">
+      <a routerLink="/admin/orders">orders</a>
+    </li>
+
+    <li>
+      <a routerLink="/admin">logout</a>
+    </li>
+
+    <li routerLinkActive="active">
+      <a routerLink="/admin/login">login</a>
+    </li>
+
+
+  </ul>
+</nav>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
