@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 import {QuillModule} from "ngx-quill";
+import {ProductService} from "../../common/product.service";
 
 @Component({
   selector: 'app-add-page',
@@ -14,6 +15,10 @@ export class AddPageComponent {
 
   form: FormGroup;
   submitted = false;
+  constructor(
+    public productService: ProductService,
+  ) {
+  }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -30,14 +35,18 @@ export class AddPageComponent {
       if (this.form.invalid){
         return
       }
-      this.submitted = true;
+      // this.submitted = true;
       const product = {
         type: this.form.value.type,
         title: this.form.value.title,
         photo: this.form.value.photo,
         info: this.form.value.info,
-        price: this.form.value.price
+        price: this.form.value.price,
+        data: new Date()
       }
-      console.log(this.form)
+
+
+  this.productService.createProduct(product).subscribe(res=>console.log(res))
+
     }
 }
