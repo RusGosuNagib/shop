@@ -16,14 +16,14 @@ export class ProductService {
   }
   createProduct(product: ProductModel){
     return this.http.post<ProductModel>(`${environment.fbBDUrl}/products.json`,product)
-      // .pipe(
-      //   map(result => {
-      //     return {
-      //       product,
-      //       id: result.name,
-      //       date: new Date(product.date),
-      //     }
-      //   }),
-      // )
+      .pipe(
+        map(result => {
+          return {
+            ...product,
+            id: result.name,
+            date: new Date(product.date),
+          }
+        }),
+      )
   }
 }
