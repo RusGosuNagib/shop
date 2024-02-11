@@ -44,5 +44,3 @@ export class AuthService {
     return !!this.token
   }
 }
-
-// gamach666@gmail.com/123456
