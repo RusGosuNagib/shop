@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {UserModel} from "../models/user.model";
-import {ProductModel} from "../models/product.model";
+import {ProductModel, ProductRespModel} from "../models/product.model";
 import {environment} from "../../environments/environment.development";
-import {log} from "@angular-devkit/build-angular/src/builders/ssr-dev-server";
 import {map} from "rxjs";
 
 @Injectable({
@@ -15,7 +13,7 @@ export class ProductService {
 
   }
   createProduct(product: ProductModel){
-    return this.http.post<ProductModel>(`${environment.fbBDUrl}/products.json`,product)
+    return this.http.post<ProductModel>(`${environment.fbBDUrl}`,product)
       .pipe(
         map(result => {
           return {
@@ -25,5 +23,16 @@ export class ProductService {
           }
         }),
       )
+  }
+
+  getAll(){
+    return this.http.get<ProductRespModel>(`${environment.fbBDUrl}`)
+      .pipe(map(res => {
+        return Object.keys(res)
+          .map(key=>({
+            ...res[key],
+            id: key,
+          }))
+      }))
   }
 }

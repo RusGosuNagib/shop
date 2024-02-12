@@ -1,0 +1,12 @@
+.dashboard{
+  display: flex;
+  justify-content: space-around;
+  align-content: flex-start;
+}
+.box {
+  max-height: 650px;
+  width: 33%;
+  margin: 5px;
+  padding: 10px;
+  flex: 0 1 auto;
+  }

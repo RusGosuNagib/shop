@@ -28,6 +28,7 @@ export class LoginPageComponent implements OnInit {
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     })
   }
+
   submit(){
     if (this.loginForm.invalid){
       return;
@@ -39,7 +40,6 @@ export class LoginPageComponent implements OnInit {
       returnSecureToken: true,
     }
     this.auth.login(user).subscribe(res => {
-      console.log(res)
       this.loginForm.reset()
       this.router.navigate(['/admin', 'dashboard'])
       this.submitted = false

@@ -1,0 +1,15 @@
+.product-flex-cont {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-content: center;
+  height: 650px;
+}
+.product-card-container {
+  max-height: 415px;
+}
+.product-flex-box{
+  padding: 10px;
+  flex: 2 1 100px;
+  align-self: center;
+}

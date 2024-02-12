@@ -3,6 +3,8 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {CommonModule} from "@angular/common";
 import {QuillModule} from "ngx-quill";
 import {ProductService} from "../../common/product.service";
+import {Router} from "@angular/router";
+import {ProductModel} from "../../models/product.model";
 
 @Component({
   selector: 'app-add-page',
@@ -17,6 +19,7 @@ export class AddPageComponent {
   submitted = false;
   constructor(
     public productService: ProductService,
+    private router: Router
   ) {
   }
 
@@ -35,18 +38,23 @@ export class AddPageComponent {
       if (this.form.invalid){
         return
       }
-      // this.submitted = true;
-      const product = {
+      this.submitted = true;
+      const product : ProductModel = {
         type: this.form.value.type,
         title: this.form.value.title,
         photo: this.form.value.photo,
         info: this.form.value.info,
         price: this.form.value.price,
-        data: new Date()
+        date: new Date().toString()
       }
 
 
-  this.productService.createProduct(product).subscribe(res=>console.log(res))
+  this.productService.createProduct(product).subscribe(res=> {
+      this.form.reset()
+      this.submitted = false
+    this.router.navigate(['/'])
+    }
+  )
 
     }
 }
