@@ -19,7 +19,6 @@ import {CommonModule, NgIf} from "@angular/common";
 export class ProductPageComponent {
 
   product$: Observable<ProductModel>
-  loading: any;
 
   constructor(
     private productService: ProductService,

@@ -44,5 +44,15 @@ export class ProductService {
       }))
   }
 
+  removeProduct (id: string):Observable<ProductModel>{
+    return this.http.delete<ProductModel>(`${environment.fbBDUrl}/products/${id}.json`)
+  }
+
+  updateProduct (product: ProductModel):Observable<ProductModel>{
+    return this.http.patch<ProductModel>(`${environment.fbBDUrl}/products/${product.id}.json`,product)
+  }
+
+
+
 
 }
