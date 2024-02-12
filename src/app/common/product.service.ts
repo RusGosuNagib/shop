@@ -8,6 +8,7 @@ import {map, Observable} from "rxjs";
   providedIn: 'root'
 })
 export class ProductService {
+  private prodId: string;
 
   constructor(private http: HttpClient) {
 
@@ -37,10 +38,10 @@ export class ProductService {
   }
 
   getById(id: string):Observable<ProductModel>{
+    this.prodId = id;
     return this.http.get<ProductModel>(`${environment.fbBDUrl}/products/${id}.json`)
       .pipe(map(res => {
-        // @ts-ignore
-        return res
+        return {...res, id: this.prodId};
       }))
   }
 
@@ -49,6 +50,8 @@ export class ProductService {
   }
 
   updateProduct (product: ProductModel):Observable<ProductModel>{
+    console.log('product    ',  product)
+    console.log('product.id   ',  product.id)
     return this.http.patch<ProductModel>(`${environment.fbBDUrl}/products/${product.id}.json`,product)
   }
 
