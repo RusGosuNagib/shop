@@ -21,11 +21,11 @@ export const AuthInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, ne
         auth: auth.token
       }
     })
-    console.log(26, auth.token)
+
   }
   return next(req).pipe(
     catchError(error =>{
-      console.log(26,auth.token)
+
       if (error.status === 401){
         auth.logout();
         router.navigate(['/admin', 'login'])
