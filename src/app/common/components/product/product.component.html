@@ -10,6 +10,6 @@
 
   <div class="product-flex-box">
     <button [routerLink]="['/product', product.id]" class="btn btn-dark">Open</button>
-    <button [routerLink]="['/cart']" class="btn btn-dark">Add to cart</button>
+    <button [routerLink]="['/cart']" class="btn btn-dark" (click)="addToCart(product)">Add to cart</button>
   </div>
 </div>

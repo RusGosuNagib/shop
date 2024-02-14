@@ -11,6 +11,7 @@ export class ProductService {
 
   private prodId: string;
   type:string = 'Tshirts';
+  productsInCart: ProductModel[] = [];
 
   constructor(private http: HttpClient) {
 
@@ -59,6 +60,10 @@ export class ProductService {
 
   setType(type:string){
       this.type = type;
+  }
+
+  addProductsToCart  (product: ProductModel){
+    this.productsInCart.push(product)
   }
 
 }

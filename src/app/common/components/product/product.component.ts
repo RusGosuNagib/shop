@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 import {ProductModel} from "../../../models/product.model";
 import {QuillViewHTMLComponent} from "ngx-quill";
 import {RouterLink} from "@angular/router";
+import {ProductService} from "../../product.service";
 
 @Component({
   selector: 'app-product',
@@ -17,4 +18,13 @@ import {RouterLink} from "@angular/router";
 export class ProductComponent {
   @Input()
   product: ProductModel;
+
+  constructor(
+    private productService: ProductService
+  ){}
+  ngOnInit(): void {}
+
+  addToCart(product: ProductModel){
+    this.productService.addProductsToCart(product)
+  }
 }

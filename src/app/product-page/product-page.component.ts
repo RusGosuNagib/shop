@@ -31,4 +31,10 @@ export class ProductPageComponent {
         return this.productService.getById(params['id']);
       }))
   }
+
+  addToCart(product: ProductModel){
+    this.productService.addProductsToCart(product)
+  }
+
+
 }
