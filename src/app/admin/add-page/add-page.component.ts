@@ -5,11 +5,14 @@ import {QuillModule} from "ngx-quill";
 import {ProductService} from "../../common/product.service";
 import {Router} from "@angular/router";
 import {ProductModel} from "../../models/product.model";
+import {CKEditorModule} from "@ckeditor/ckeditor5-angular";
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import Editor from "@ckeditor/ckeditor5-build-classic";
 
 @Component({
   selector: 'app-add-page',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, QuillModule],
+  imports: [CommonModule, ReactiveFormsModule, QuillModule, CKEditorModule],
   templateUrl: './add-page.component.html',
   styleUrl: './add-page.component.scss'
 })
@@ -17,10 +20,11 @@ export class AddPageComponent {
 
   form: FormGroup;
   submitted = false;
+  public Editor = ClassicEditor;
 
   constructor(
     public productService: ProductService,
-    private router: Router
+    private router: Router,
   ) {
   }
 

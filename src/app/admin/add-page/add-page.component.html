@@ -1,8 +1,8 @@
 <form [formGroup]="form" (ngSubmit)="submit()">
-  <h2 class="text-center">add</h2>
+  <h2 class="text-center">Добавить</h2>
 
   <div class="form-control">
-    <label for="type">type</label>
+    <label for="type">Тип</label>
     <select id="type" formControlName="type">
       <option value="Tshirts">Футболки</option>
       <option value="Shoes">Обувь</option>
@@ -14,7 +14,7 @@
   </div>
 
   <div class="form-control">
-    <label for="title">title</label>
+    <label for="title">Название</label>
     <input id="title" formControlName="title">
     <div *ngIf="form.get('title').touched && form.get('title').invalid" class="validation">
       <small *ngIf="form.get('title')?.errors?.required">enter title</small>
@@ -22,27 +22,25 @@
   </div>
 
   <div class="form-control">
-    <label for="photo">photo</label>
+    <label for="photo">Фото</label>
     <quill-editor id="photo" formControlName="photo"></quill-editor>
   </div>
 
   <div class="form-control">
-    <label for="info">info</label>
-    <quill-editor id="info" formControlName="info"></quill-editor>
+    <label for="info">Инфо</label>
+    <ckeditor id="info" formControlName="info" [editor]="Editor" data="<p>Info</p>"></ckeditor>
   </div>
 
   <div class="form-control">
-    <label for="price">price</label>
+    <label for="price">Цена</label>
     <input id="price" formControlName="price">
     <div *ngIf="form.get('price').touched && form.get('price').invalid" class="validation">
       <small *ngIf="form.get('price')?.errors?.required">enter price</small>
     </div>
   </div>
 
-
   <button id="submit" type="submit" class="btn btn-primary btn-block"
-          [disabled]="form.invalid || submitted">
-    logon
+          [disabled]="form.invalid || submitted">Добавить
   </button>
 
 </form>

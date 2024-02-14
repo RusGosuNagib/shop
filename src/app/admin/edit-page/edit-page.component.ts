@@ -7,6 +7,8 @@ import {ProductModel} from "../../models/product.model";
 import {NgIf} from "@angular/common";
 import {QuillEditorComponent} from "ngx-quill";
 import {FileUpload} from "../../common/utils/fileUpload";
+import Editor from "@ckeditor/ckeditor5-build-classic";
+import {CKEditorModule} from "@ckeditor/ckeditor5-angular";
 
 @Component({
   selector: 'app-edit-page',
@@ -15,7 +17,8 @@ import {FileUpload} from "../../common/utils/fileUpload";
     NgIf,
     QuillEditorComponent,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    CKEditorModule
   ],
   templateUrl: './edit-page.component.html',
   styleUrl: './edit-page.component.scss'
@@ -89,4 +92,5 @@ export class EditPageComponent {
   }
 
   protected readonly console = console;
+    protected readonly Editor = Editor;
 }
