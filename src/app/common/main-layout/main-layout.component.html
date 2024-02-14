@@ -2,16 +2,16 @@
   <h2>Магаз</h2>
   <ul>
     <li routerLinkActive="active">
-      <a href="#">1 ссылка</a>
+      <a (click)="setType('Tshirts')">Футболки</a>
     </li>
     <li routerLinkActive="active">
-      <a href="#">2 ссылка</a>
+      <a (click)="setType('Shoes')">Обувь</a>
     </li>
     <li routerLinkActive="active">
-      <a href="#">3 ссылка</a>
+      <a (click)="setType('Accessories')">Аксессуары</a>
     </li>
     <li routerLinkActive="active">
-      <a routerLink="/cart">cart</a>
+      <a (click)="setType('Cart')" routerLink="/cart">Корзина</a>
     </li>
   </ul>
 </nav>
