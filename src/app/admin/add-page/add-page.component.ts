@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 import {QuillModule} from "ngx-quill";
@@ -17,6 +17,7 @@ export class AddPageComponent {
 
   form: FormGroup;
   submitted = false;
+
   constructor(
     public productService: ProductService,
     private router: Router
@@ -31,30 +32,28 @@ export class AddPageComponent {
       info: new FormControl(null, Validators.required),
       price: new FormControl(null, Validators.required),
     })
+  }
 
+  submit() {
+    if (this.form.invalid) {
+      return
+    }
+    this.submitted = true;
+    const product: ProductModel = {
+      type: this.form.value.type,
+      title: this.form.value.title,
+      photo: this.form.value.photo,
+      info: this.form.value.info,
+      price: this.form.value.price,
+      date: new Date().toString()
+    }
+
+    this.productService.createProduct(product).subscribe(res => {
+        this.form.reset()
+        this.submitted = false
+        this.router.navigate(['/'])
+      }
+    )
 
   }
-    submit(){
-      if (this.form.invalid){
-        return
-      }
-      this.submitted = true;
-      const product : ProductModel = {
-        type: this.form.value.type,
-        title: this.form.value.title,
-        photo: this.form.value.photo,
-        info: this.form.value.info,
-        price: this.form.value.price,
-        date: new Date().toString()
-      }
-
-
-  this.productService.createProduct(product).subscribe(res=> {
-      this.form.reset()
-      this.submitted = false
-    this.router.navigate(['/'])
-    }
-  )
-
-    }
 }

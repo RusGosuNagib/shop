@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {ProductModel, ProductRespModel} from "../models/product.model";
 import {environment} from "../../environments/environment.development";
@@ -10,14 +10,14 @@ import {map, Observable} from "rxjs";
 export class ProductService {
 
   private prodId: string;
-  type:string = 'Tshirts';
+  type: string = 'Tshirts';
   productsInCart: ProductModel[] = [];
 
   constructor(private http: HttpClient) {
-
   }
-  createProduct(product: ProductModel){
-    return this.http.post<ProductModel>(`${environment.fbBDUrl}/products.json`,product)
+
+  createProduct(product: ProductModel) {
+    return this.http.post<ProductModel>(`${environment.fbBDUrl}/products.json`, product)
       .pipe(
         map(result => {
           return {
@@ -29,18 +29,18 @@ export class ProductService {
       )
   }
 
-  getAll(){
+  getAll(): Observable<ProductModel[]> {
     return this.http.get<ProductRespModel>(`${environment.fbBDUrl}/products.json`)
       .pipe(map(res => {
         return Object.keys(res)
-          .map(key=>({
+          .map(key => ({
             ...res[key],
             id: key,
           }))
       }))
   }
 
-  getById(id: string):Observable<ProductModel>{
+  getById(id: string): Observable<ProductModel> {
     this.prodId = id;
     return this.http.get<ProductModel>(`${environment.fbBDUrl}/products/${id}.json`)
       .pipe(map(res => {
@@ -48,21 +48,21 @@ export class ProductService {
       }))
   }
 
-  removeProduct (id: string):Observable<ProductModel>{
+  removeProduct(id: string): Observable<ProductModel> {
     return this.http.delete<ProductModel>(`${environment.fbBDUrl}/products/${id}.json`)
   }
 
-  updateProduct (product: ProductModel):Observable<ProductModel>{
-    console.log('product    ',  product)
-    console.log('product.id   ',  product.id)
-    return this.http.patch<ProductModel>(`${environment.fbBDUrl}/products/${product.id}.json`,product)
+  updateProduct(product: ProductModel): Observable<ProductModel> {
+    console.log('product    ', product)
+    console.log('product.id   ', product.id)
+    return this.http.patch<ProductModel>(`${environment.fbBDUrl}/products/${product.id}.json`, product)
   }
 
-  setType(type:string){
-      this.type = type;
+  setType(type: string) {
+    this.type = type;
   }
 
-  addProductsToCart  (product: ProductModel){
+  addProductsToCart(product: ProductModel) {
     this.productsInCart.push(product)
   }
 
