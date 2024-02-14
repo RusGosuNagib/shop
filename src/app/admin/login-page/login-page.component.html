@@ -14,15 +14,16 @@
     <div *ngIf="loginForm.get('password').touched && loginForm.get('password').invalid" class="validation">
       <small *ngIf="loginForm.get('password').errors.required">Enter Password</small>
       <small *ngIf="loginForm.get('password').errors.minlength">
-        Passwor must be at least  {{loginForm.get('password').errors.minlength.requiredLength}} characters.
-        Now he {{loginForm.get('password').errors.minlength.actualLength}}
+        Passwor must be at least  {{ loginForm.get('password').errors.minlength.requiredLength }} characters.
+        Now he {{ loginForm.get('password').errors.minlength.actualLength }}
       </small>
     </div>
   </div>
 
   <button id="submit" type="submit" class="btn btn-primary btn-block"
-          [disabled]="loginForm.invalid || submitted" >
-logon </button>
+          [disabled]="loginForm.invalid || submitted">
+    logon
+  </button>
 
 </form>
 

@@ -19,7 +19,7 @@ export class LoginPageComponent implements OnInit {
   constructor(
     public auth: AuthService,
     private router: Router
-    ) {
+  ) {
   }
 
   ngOnInit() {
@@ -29,8 +29,8 @@ export class LoginPageComponent implements OnInit {
     })
   }
 
-  submit(){
-    if (this.loginForm.invalid){
+  submit() {
+    if (this.loginForm.invalid) {
       return;
     }
     this.submitted = true;
@@ -43,7 +43,7 @@ export class LoginPageComponent implements OnInit {
       this.loginForm.reset()
       this.router.navigate(['/admin', 'dashboard'])
       this.submitted = false
-    }), () =>{
+    }), () => {
       this.submitted = false
     }
   }

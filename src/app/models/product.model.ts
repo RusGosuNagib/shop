@@ -10,7 +10,7 @@ export class ProductModel {
   id?: string
 }
 
-export type ProductRespModel =   {
+export type ProductRespModel = {
   [key: string]: ProductModel
 }
 

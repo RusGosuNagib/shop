@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Router, RouterLink} from "@angular/router";
 import {ProductService} from "../../common/product.service";
 import {ProductModel} from "../../models/product.model";
@@ -26,10 +26,11 @@ export class DashboardComponent {
   constructor(
     private router: Router,
     private productService: ProductService,
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
-    this.pSub = this.productService.getAll().subscribe( products =>{
+    this.pSub = this.productService.getAll().subscribe(products => {
       this.products = products;
     })
   }
@@ -44,8 +45,8 @@ export class DashboardComponent {
   }
 
   remove(id: string) {
-    this.rSub = this.productService.removeProduct(id).subscribe(()=>{
-      this.products = this.products.filter( product => product.id !== id)
+    this.rSub = this.productService.removeProduct(id).subscribe(() => {
+      this.products = this.products.filter(product => product.id !== id)
     })
   }
 

@@ -14,18 +14,18 @@ import {SortingPipe} from "../common/sorting.pipe";
   styleUrl: './main-page.component.scss'
 })
 
-export class MainPageComponent implements OnInit{
+export class MainPageComponent implements OnInit {
 
   products$: Observable<ProductModel[]>;
 
   constructor(
     protected productService: ProductService
-  ) {}
-
-  ngOnInit(): void {
-   this.products$ = this.productService.getAll()
+  ) {
   }
 
+  ngOnInit(): void {
+    this.products$ = this.productService.getAll()
+  }
 
 
 }

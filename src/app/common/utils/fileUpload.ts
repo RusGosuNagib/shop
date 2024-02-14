@@ -3,7 +3,7 @@ import {from, Observable, of} from "rxjs";
 export class FileUpload {
 
 
-  private b64Image: string ;
+  private b64Image: string;
 
   uploadBase64(fileList: any, uploadStatus: boolean): any {
     let fileReader = new FileReader()

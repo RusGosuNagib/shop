@@ -15,18 +15,18 @@ export const AuthInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, ne
   const auth = inject(AuthService)
   const router = inject(Router)
 
-  if (auth.isAuthenticated()){
+  if (auth.isAuthenticated()) {
     req = req.clone({
-      setParams:{
+      setParams: {
         auth: auth.token
       }
     })
 
   }
   return next(req).pipe(
-    catchError(error =>{
+    catchError(error => {
 
-      if (error.status === 401){
+      if (error.status === 401) {
         auth.logout();
         router.navigate(['/admin', 'login'])
       }

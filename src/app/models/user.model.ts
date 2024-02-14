@@ -1,4 +1,4 @@
-export class UserModel{
+export class UserModel {
   email: string
   password: string
   returnSecureToken: boolean

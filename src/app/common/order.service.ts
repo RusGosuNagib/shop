@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {ProductModel, ProductRespModel} from "../models/product.model";
 import {environment} from "../../environments/environment.development";
@@ -24,6 +24,7 @@ export class OrderService {
         }),
       )
   }
+
   getAll(): Observable<OrderModel[]> {
     return this.http.get<OrderRespModel>(`${environment.fbBDUrl}/orders.json`)
       .pipe(map(res => {

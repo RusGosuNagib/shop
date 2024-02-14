@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {ProductService} from "../../common/product.service";
 import {map, switchMap} from "rxjs";
@@ -34,15 +34,16 @@ export class EditPageComponent {
     private route: ActivatedRoute,
     private productService: ProductService,
     private router: Router
-  ){}
+  ) {
+  }
 
 
   ngOnInit(): void {
     this.route.params.pipe(switchMap(params => {
-      this.prodId = params['id'];
-      return this.productService.getById(params['id']);
-    })
-    ).subscribe(product =>  {
+        this.prodId = params['id'];
+        return this.productService.getById(params['id']);
+      })
+    ).subscribe(product => {
         this.product = product
         this.form = new FormGroup({
           // photo: new FormControl(this.product.photo, Validators.required),
@@ -63,12 +64,11 @@ export class EditPageComponent {
     let file
   }
 
-  submit(){
-    if (this.form.invalid){
+  submit() {
+    if (this.form.invalid) {
       return
     }
     this.submitted = true;
-
 
 
     this.productService.updateProduct(
@@ -83,8 +83,8 @@ export class EditPageComponent {
         date: new Date().toString()
       }
     ).subscribe(product => {
-        this.submitted = false;
-        this.router.navigate(['/admin', 'dashboard'])
+      this.submitted = false;
+      this.router.navigate(['/admin', 'dashboard'])
     })
   }
 

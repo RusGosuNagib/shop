@@ -21,10 +21,13 @@ export class ProductComponent {
 
   constructor(
     private productService: ProductService
-  ){}
-  ngOnInit(): void {}
+  ) {
+  }
 
-  addToCart(product: ProductModel){
+  ngOnInit(): void {
+  }
+
+  addToCart(product: ProductModel) {
     this.productService.addProductsToCart(product)
   }
 }

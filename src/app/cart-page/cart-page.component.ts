@@ -25,7 +25,7 @@ export class CartPageComponent {
   totalPrice = 0;
   form: FormGroup;
   submitted = false;
-  added='';
+  added = '';
 
   constructor(
     private productService: ProductService,

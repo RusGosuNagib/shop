@@ -1,12 +1,12 @@
 <div class="text-center product-flex-cont">
-  <div class="product-flex-box"><h2>{{product.title}}</h2></div>
+  <div class="product-flex-box"><h2>{{ product.title }}</h2></div>
 
   <div class="product-flex-box product-card-container">
-<!--  <div class="flex-center product-card-container">-->
+    <!--  <div class="flex-center product-card-container">-->
     <quill-view-html [content]="product.photo"></quill-view-html>
   </div>
 
-  <div class="product-flex-box">{{product.price}}</div>
+  <div class="product-flex-box">{{ product.price }}</div>
 
   <div class="product-flex-box">
     <button [routerLink]="['/product', product.id]" class="btn btn-dark">Open</button>

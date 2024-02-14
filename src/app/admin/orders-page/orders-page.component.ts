@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {OrderService} from "../../common/order.service";
 import {Subscription} from "rxjs";
 import {Router} from "@angular/router";
@@ -23,10 +23,11 @@ export class OrdersPageComponent {
 
   constructor(
     private orderService: OrderService,
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
-    this.pSub = this.orderService.getAll().subscribe( orders =>{
+    this.pSub = this.orderService.getAll().subscribe(orders => {
       this.orders = orders;
     })
   }
@@ -41,8 +42,8 @@ export class OrdersPageComponent {
   }
 
   remove(id: string) {
-    this.rSub = this.orderService.removeOrder(id).subscribe(()=>{
-      this.orders = this.orders.filter( order => order.id !== id)
+    this.rSub = this.orderService.removeOrder(id).subscribe(() => {
+      this.orders = this.orders.filter(order => order.id !== id)
     })
   }
 

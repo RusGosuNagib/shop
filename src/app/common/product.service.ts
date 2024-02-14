@@ -53,8 +53,6 @@ export class ProductService {
   }
 
   updateProduct(product: ProductModel): Observable<ProductModel> {
-    console.log('product    ', product)
-    console.log('product.id   ', product.id)
     return this.http.patch<ProductModel>(`${environment.fbBDUrl}/products/${product.id}.json`, product)
   }
 

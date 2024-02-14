@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {ProductService} from "../common/product.service";
 import {ActivatedRoute, RouterLink} from "@angular/router";
 import {Observable, switchMap} from "rxjs";
@@ -23,16 +23,17 @@ export class ProductPageComponent {
   constructor(
     private productService: ProductService,
     private route: ActivatedRoute
-  ) {}
+  ) {
+  }
 
-  ngOnInit(){
+  ngOnInit() {
     this.product$ = this.route.params
-      .pipe( switchMap (params => {
+      .pipe(switchMap(params => {
         return this.productService.getById(params['id']);
       }))
   }
 
-  addToCart(product: ProductModel){
+  addToCart(product: ProductModel) {
     this.productService.addProductsToCart(product)
   }
 

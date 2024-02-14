@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Router, RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
 import {AuthService} from "../../../common/auth.service";
 import {CommonModule} from "@angular/common";
@@ -15,9 +15,10 @@ export class AdminLayoutComponent {
   constructor(
     public auth: AuthService,
     private router: Router,
-  ){}
+  ) {
+  }
 
-  logout(event: MouseEvent){
+  logout(event: MouseEvent) {
     event.preventDefault()
     this.auth.logout()
     this.router.navigate(['/admin', 'login'])
