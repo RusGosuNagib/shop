@@ -4,12 +4,14 @@ import {ProductService} from "../../common/product.service";
 import {ProductModel} from "../../models/product.model";
 import {Subscription} from "rxjs";
 import {CommonModule} from "@angular/common";
+import {FormsModule} from "@angular/forms";
+import {SearchPipe} from "../../common/search.pipe";
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [
-    RouterLink, CommonModule,
+    RouterLink, CommonModule, FormsModule, SearchPipe,
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
@@ -19,6 +21,7 @@ export class DashboardComponent {
   products: any[] = []
   pSub: Subscription;
   rSub: Subscription;
+  productName: string;
 
   constructor(
     private router: Router,
