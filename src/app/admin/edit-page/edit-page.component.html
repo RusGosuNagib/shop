@@ -21,11 +21,18 @@
         <small *ngIf="form.get('title').errors.required">Enter product name</small>
       </div>
     </div>
-    {{console.log(product.photo)}}
+<!--    {{console.log(product.photo)}}-->
     <div class="form-control">
       <label for="type">Photo:</label>
+
+<!--      <div *ngIf="uploadStatus === true; else upload">1</div>-->
+<!--      <ng-template #upload>-->
+<!--        <p class="text-center">upload...</p>-->
+<!--      </ng-template>-->
+<!--      <input id="input" type="file" formControlName="photo" (change)="handleFiles($event)" />-->
+
+
       <quill-editor format="html"  formControlName="photo"></quill-editor>
-<!--      <quill-editor (onEditorCreated)="created($event)"></quill-editor>-->
 
     </div>
     <div class="form-control">
