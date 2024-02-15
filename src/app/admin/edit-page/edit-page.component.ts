@@ -1,7 +1,7 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {ProductService} from "../../common/product.service";
-import {map, switchMap} from "rxjs";
+import {switchMap} from "rxjs";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ProductModel} from "../../models/product.model";
 import {NgIf} from "@angular/common";
@@ -24,14 +24,15 @@ import {CKEditorModule} from "@ckeditor/ckeditor5-angular";
   styleUrl: './edit-page.component.scss'
 })
 
-export class EditPageComponent {
+export class EditPageComponent implements OnInit {
 
   form: FormGroup;
   product: ProductModel;
   submitted: boolean;
   private prodId: string;
   uploader: FileUpload;
-  uploadStatus: boolean = true;
+  uploadedFile: string;
+  isLoading: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -46,11 +47,11 @@ export class EditPageComponent {
         this.prodId = params['id'];
         return this.productService.getById(params['id']);
       })
-    ).subscribe(product => {
+    ).subscribe((product: ProductModel) => {
         this.product = product
+        this.uploadedFile = product.photo;
         this.form = new FormGroup({
-          // photo: new FormControl(this.product.photo, Validators.required),
-          photo: new FormControl('', Validators.required),
+          photo: new FormControl(''),
           type: new FormControl(this.product.type, Validators.required),
           title: new FormControl(this.product.title, Validators.required),
           info: new FormControl(this.product.info, Validators.required),
@@ -61,13 +62,17 @@ export class EditPageComponent {
   }
 
   handleFiles($event: Event) {
-    this.uploadStatus = false;
+    this.isLoading = true
     this.uploader = new FileUpload();
-    this.uploader.uploadBase64($event, this.uploadStatus)
-    let file
+     this.uploader.uploadBase64($event).subscribe((file: string) =>{
+       this.uploadedFile = file;
+       this.isLoading = false
+    })
+
   }
 
   submit() {
+
     if (this.form.invalid) {
       return
     }
@@ -80,7 +85,7 @@ export class EditPageComponent {
         id: this.prodId,
         type: this.form.value.type,
         title: this.form.value.title,
-        photo: this.form.value.photo,
+        photo: this.uploadedFile,
         info: this.form.value.info,
         price: this.form.value.price,
         date: new Date().toString()

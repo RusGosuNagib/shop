@@ -10,6 +10,7 @@
     <tr>
       <th>ID</th>
       <th>Name</th>
+      <th>photo</th>
       <th>Price</th>
       <th>Date of creation</th>
       <th>Open</th>
@@ -21,6 +22,9 @@
     <tr *ngFor="let product of products | search : productName; let idx = index">
       <td>{{ idx + 1 }}</td>
       <td>{{ product.title }}</td>
+      <td>
+        <img class="dashboard_table_img" [src]="product.photo" alt="">
+      </td>
       <td>{{ product.price }}</td>
       <td>{{ product.date | date : 'short' }}</td>
       <td>

@@ -2,8 +2,8 @@
   <div class="product-flex-box"><h2>{{ product.title }}</h2></div>
 
   <div class="product-flex-box product-card-container">
-    <!--  <div class="flex-center product-card-container">-->
-    <quill-view-html [content]="product.photo"></quill-view-html>
+
+    <img [src]="product.photo" alt="">
   </div>
 
   <div class="product-flex-box">{{ product.price }}</div>
