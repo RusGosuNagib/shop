@@ -33,6 +33,6 @@ export class ProductComponent {
    * @param product - The product to be added to the cart
    */
   addToCart(product: ProductModel) {
-    this.productService.addProductsToCart(product);
+    this.productService.addProductToCart(product);
   }
 }
