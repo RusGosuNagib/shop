@@ -12,15 +12,29 @@ import {CommonModule} from "@angular/common";
 })
 export class AdminLayoutComponent {
 
+  /**
+   * Constructor for initializing the AuthService and Router
+   * @param auth - The authentication service
+   * @param router - The router for navigation
+   */
   constructor(
     public auth: AuthService,
     private router: Router,
   ) {
   }
 
-  logout(event: MouseEvent) {
-    event.preventDefault()
-    this.auth.logout()
-    this.router.navigate(['/admin', 'login'])
+  /**
+   * Handles the logout event.
+   * @param {MouseEvent} event - The mouse event triggering the logout.
+   */
+  logout(event: MouseEvent): void {
+    // Prevent the default action of the event
+    event.preventDefault();
+
+    // Logout the user
+    this.auth.logout();
+
+    // Navigate to the admin login page
+    this.router.navigate(['/admin', 'login']);
   }
 }

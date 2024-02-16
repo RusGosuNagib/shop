@@ -7,7 +7,13 @@ import {ProductModel} from "../models/product.model";
 })
 export class SortingPipe implements PipeTransform {
 
-  transform(products: ProductModel[], type = '') {
+  /**
+   * Filters products by type.
+   * @param {ProductModel[]} products - The array of products to filter.
+   * @param {string} type - The type to filter by.
+   * @returns {ProductModel[]} - The filtered array of products.
+   */
+  transform(products: ProductModel[], type: string = ''): ProductModel[] {
     return products.filter((product: ProductModel) => {
       return product.type.value === type;
     });

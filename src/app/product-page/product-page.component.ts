@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ProductService} from "../common/product.service";
 import {ActivatedRoute, RouterLink} from "@angular/router";
 import {Observable, switchMap} from "rxjs";
@@ -21,25 +21,38 @@ import {SkeletonModule} from "primeng/skeleton";
   templateUrl: './product-page.component.html',
   styleUrl: './product-page.component.scss'
 })
-export class ProductPageComponent {
+export class ProductPageComponent implements OnInit {
 
   product$: Observable<ProductModel>
 
+  /**
+   * Constructor for initializing ProductService and ActivatedRoute
+   * @param productService - instance of ProductService
+   * @param route - instance of ActivatedRoute
+   */
   constructor(
     private productService: ProductService,
     private route: ActivatedRoute
   ) {
   }
 
+  /**
+   * Initialize the component
+   */
   ngOnInit() {
-    this.product$ = this.route.params
-      .pipe(switchMap(params => {
-        return this.productService.getById(params['id']);
-      }))
+    // Subscribe to route params and fetch product by ID
+    this.product$ = this.route.params.pipe(
+      switchMap(params => this.productService.getById(params['id']))
+    );
   }
 
+  /**
+   * Add a product to the cart.
+   *
+   * @param product - The product to be added to the cart.
+   */
   addToCart(product: ProductModel) {
-    this.productService.addProductsToCart(product)
+    this.productService.addProductToCart(product);
   }
 
 

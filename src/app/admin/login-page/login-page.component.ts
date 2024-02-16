@@ -4,16 +4,13 @@ import {CommonModule} from "@angular/common";
 import {AuthService} from "../../common/auth.service";
 import {Router} from "@angular/router";
 import {UserModel} from "../../models/user.model";
-import { CardModule } from 'primeng/card';
+import {CardModule} from 'primeng/card';
 import {ButtonModule} from "primeng/button";
-import { InputGroupModule } from 'primeng/inputgroup';
-import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
-import { InputTextModule } from 'primeng/inputtext';
+import {InputGroupModule} from 'primeng/inputgroup';
+import {InputGroupAddonModule} from 'primeng/inputgroupaddon';
+import {InputTextModule} from 'primeng/inputtext';
 import {ImageModule} from "primeng/image";
 import {StyleClassModule} from 'primeng/styleclass';
-
-
-
 
 
 @Component({
@@ -24,38 +21,60 @@ import {StyleClassModule} from 'primeng/styleclass';
   styleUrl: './login-page.component.scss'
 })
 export class LoginPageComponent implements OnInit {
+
   loginForm: FormGroup
   submitted = false
   img: string = 'data:image/gif;base64,R0lGODlhrgGLAcQAAP//////xv/Jy//Jkf+TlszMzMzMk9WWmNWWXdteY9teH5mZmZmZX6JjZaJjJqYoLmZmZmZmKm4vMW4vADMzMzMzADkANTkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH/C1hNUCBEYXRhWE1QPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgOS4wLWMwMDAgNzkuMTcxYzI3ZmFiLCAyMDIyLzA4LzE2LTIyOjM1OjQxICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgMjQuMCAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo2NjE0ODRGRUMxQ0QxMUVFOTBDMEI3MUQxMkY1NDU2OSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo2NjE0ODRGRkMxQ0QxMUVFOTBDMEI3MUQxMkY1NDU2OSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjI0ODFCMjA5QzFDRDExRUU5MEMwQjcxRDEyRjU0NTY5IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjI0ODFCMjBBQzFDRDExRUU5MEMwQjcxRDEyRjU0NTY5Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+Af/+/fz7+vn49/b19PPy8fDv7u3s6+rp6Ofm5eTj4uHg397d3Nva2djX1tXU09LR0M/OzczLysnIx8bFxMPCwcC/vr28u7q5uLe2tbSzsrGwr66trKuqqainpqWko6KhoJ+enZybmpmYl5aVlJOSkZCPjo2Mi4qJiIeGhYSDgoGAf359fHt6eXh3dnV0c3JxcG9ubWxramloZ2ZlZGNiYWBfXl1cW1pZWFdWVVRTUlFQT05NTEtKSUhHRkVEQ0JBQD8+PTw7Ojk4NzY1NDMyMTAvLi0sKyopKCcmJSQjIiEgHx4dHBsaGRgXFhUUExIREA8ODQwLCgkIBwYFBAMCAQAAIfkEAAAAAAAsAAAAAK4BiwEABf+gIY4HWZ6omQ5qy75wLM9uvd54rlN872NAy29ILBqPyKLOxmw6l88odFqSJK/YoDa77Xq/YC11TKaZz+W0GsHmut/huE+yWEvt+Pwazpf7/4BfeoNohYSHbIl9c4uBcg2Id5GTZAxWjReZjpucnZSfkqCVFZ2YpZpEoqGqnw2mpKevsWKstbaVlpezjLKAELfAwRG9u8Wxq8GGyWTEzb4My9GfzsbVjtLK2dhLrqjevNTFkNvkeeHW6HHl2uzCie+QuuDn1ePr92PD9On8tPjt/+BBiwdrXkGD+w4OCcgwR8J+EBsCbDhO30N+dCRqPADhIsR0G5ERwEfQI8iQFE3/fqyHcuLIciVVsmxJUuZKcTRFwrSo0OamXzl3+rx5LKhOd/DkfRv6J4JRoUuJSuX0tOpAprMGWl2GdeqmrVZ7Ru26EGyyjmS9/jH7VKlYhD7tHWU7xa3au4Dozt3LrU3an3pt/cWrLjBFgXbHwlWMLqNhUYMJg3l8WGu3xZEtU0bEk7FkyZtJ4nDwNvIcuaEH5TL92V9qmAJXl8bsFehr1axbu74N23Jug7xx/9YdvHfS4VE18zWcWLdzDMWN+0Z+Ovqay9QJW5fuN3uP7bjQescLXnpn2oSdls83Xvv63s1nu3/Prf18+tIqtkeNP4V4+171l59W6BEn4GgA3nWg/2rhXTWeeguikKCCETLYF2LeOVbhfxMSVaGFF05X4H0Rxveccx+CGCJ21PEnYIdqpaiif7HFJF9rti3IIYwryThjjcd596GJJxroIy5IingjjhvyONWRPwJpo2efubicUTsuWeSTUCa5omZEOpdjf2FuCVqXXn6pH5VM6ugkl2imqeZ5ZlKg3JU5ZclmnTfFKaeUUu555otvwunnn4BOKWhtBxZq6KGIJlqmZBDSp6eWfH4EaaSSktYimY5KtSmnnWJKHqih9jkqqZJmaiWeGl26aKb8rMqqlHSeOCasIU1Ka4y23gqmp3xqWF6qogYrbEWu5CpmHevJ+muVyi4bT/+zs2KUynu+Tvtotdb+tiuv5Oo0orcegmvttdkSZWx00qJ7qrrrsqgrtNt1K6+q5fbrb5SJ1uhsm/kim+y/4OqbbsEGL0xvvaZKNS7CFLeg8L6aPlyvvc8y3HCPGm/MGr4Vl+zfxw6HrGbAHBtZ3MUYR6QyxFu+ajLCKKc888oCK0pwcOfGnPHOPOPqs7vgwJszv0QX3fPASPtA8s0VBy20zE07/XSRNlPNa8tXk5i11swS27HXFMcb9rdjk73m2Wj/C/Pa6LTttsD33ra0znaz/DTY88bdr9p08923239NLPhycxdezeKQuwSw31A3doTeezN9+N1HR83D1JHvRbj/4yBvznnnjKbWOOk4mX464FF3HXooVrP+uOuvV275tpTpbvvQuFO+tW7vzi5S7b+320XwuUdca+/IJ58V86+7bPzx0Ut/CvXV/3z9KtlrXwr33Xt+EPThi38N+Zw7b03x30cxuvrKC8K+8GW/LXb88qdPfyD3a1/9diE7/qkAdv8b4GQCOCd7oO59StCL7xKowN0wEH8PXAn8DFgD/1FwLRdsoP60dTm6zO+DFQyhCEcIwdlohYNMmCAKU6jCFZptd8AxYeaAVUMMZpCEbDnhDN0XhB7asILbM8vqhpgXI/pQho0BHQxN4EEmhsGJIiRi66wiRCu2C4sNZIriprhE/y/KYYpoHFCNkNiuDcIQgWbUYhHBiEE5Ti8sVYzjFuhYRzZSBY951OMc+Ug5MQIykIJMoyLVqAg/zsqN/OuiIAG4SMlV8k9QfJ8UOYjISQLhkqCcHN4cub6gwNGTRAylKkUZJFJSaYzfKyMqvbDKWrIyk8ao1Bs7iUpC8gyXBDQlLz1py2LSzI5/pMkwienLJMlSUAWE3Cln+cVmOtOVcFHmDltjTS/JRJvLTGQ3r4nNCPYqnJMcJzmRyaZoxu2Z1FyeOn/Zwp7AEnLoTOc811nP72xEkvEE4T7ndJFz5lOPxkzoLbsDvOtNM6DZUqhEN/bQ8cXqoOIcqDf7eYF7ov8NoxnVKD+jmBKQxlGkflsj1gICT4juEaVpOscLQ2dShMI0ps9jaU1PelOckrQmOzXjRIe60Iq2U6dB9WJP/9TGEgI1qUxcKlOtMdN3brNmUvVpLp96VY7uKatyAqYRuNpVboJVqwrU5UfL6lVonhWtRYEKVKP6VrhatBxzFWpd7ZrMbYjVpYvaa1jv6Fe2ajALgpVTWvGaV6UmdqNxzY9h2/rVx0K2jZtM22QpeyPL8rWykt0sDrlAUZjCzKPkailgx5pSz2IoW2rVbGP12lrXvqMPoRUtZ51aW9sylLTR0O1z7tTbx+KyqnJj52qXRNziJlZf7mTcbHna3GUR9Vj/i0LtlYQ7XAdW17c0kg1mzqLc5b7Su98F72uZK4xymvcb+UuvsK5L30YeFRjufe9L0Stf9f7WhfjNr34Hyd/+qrdM2p0Ld0nohmbF18AH9gMkpTtdPTr4wRD2LRZusWBdWQTDGXbteWsh4AFvwVPXKnCIn+uZ6CJDtSYOw4dBnNn51teS3PlvFxL84hLH+MT6oPGK95oEVgD0x1oMspCH/FYkGBnJd7mEA5bMZLAqpsYK9jGUgaxkFVc5q85y8R1gvGUJd9nLX+5pYsQshQ6PthlSnjKV0yxSu/C4zVouMxjiPGc6D9Sck3Dzm6nB5z6H18YqpFMrBD1oQp8ZzVhG/3QAM8KTSNMuz3p+xKMhbWlJB0/OKCYNco/C6N06etOc9nQIASDq2IquvJnuRaENrer7gXrWfPkrpndtavfOmta13pzZ+MwICsM61rlEdaqdm+hfx7kCVmCzxXiNbEdEW9nLZjb5+CyCGUebIxMWQAHGTe5yd7vav7o2tv3cbHXHRASZcIqoSU1tdFt73dnWtutuLW9wh/rZ5ji2vRmMb3azjw7DyAW/JzDsb/e43gO/d8HzfWhb6yfF6j7fwyEecYkn/MLANjjRKB3vhbsFD2TuOETcjfGQi/zGrcBWv9EC8o5ivKPY47jKSzFxir8c5jhm0Zrk7A304nzjOi81Xv9YDnKf/9xP/7YRvq2A9KTv/CdMd/nTgW4uhMvZADR/AL8pbm5xm1vpDLa6mbOu9a37yE63ZvVVxg6oS6v97o2usKY/Hva2u53rZmj6O0bi8FEDqX9XdxTbW+73kFWgDUaf8OGfkPLER3nxjG+8skC9gI6cgOiSjw2ePY53y3O555rf/OM/X/gvjX7taCc9tAGEecGn3lbfLsngXU950wvcw6jPvNPjxGq4y0Pahjf7CHQde9i/qfa2F/7fYS5nABTgc7JB/u7LToLmr7xh0I++9KePY4eOw/odobuqf+97WoU//eIfPn6uTW6vc77Wsi+9/vesd4JPPf7kV37vVAD/Cnd+4ydpR8Z+7Vcb/8d38sct98cRVcBKKuB9add/3/d+Byh6ZJIAt/U5AhB6rLJ/Fkg6GviA8BKCX8d6KUaB5+Z8JThgzuaAKFgV7SB3EsiC17d9CJh/MfheJ0h2NugS7+IKPIholSeDbhaEQlhfdlJxXzNTCthrJshoM3h7ApiFcwEJ1nd0VSCCpJJuP0g/V9iEQxh4Hoh+lfJxFMhC93ZYUxiH/DeGp0GDWKiFFWMPXcgGauiB7SWGGLiApwd/d1hJATAQfQh5fviHEkaCgUiFTMSER2hM51d8EZhbgviI6CKJZygDach5ibiIA0KHkCiHYcOJnUgCllh9+KJ9/1v4gZloihSEimeYAKF4LQToiq+oY7LYiKQYiXbYgslniCvob5QmHbGoiRhDizZYhFOWi+ZBPFYYg8zYFi7iADgoTfbVi9yYjJcXjGaIhwJYB8/4Qp84ieL4JRmijKWISuAYjrOjh523AuWojdvYjY7miL/YFO8Ij+n4YuNmhHy4g6LRSvrIjr64j3NIiABoSs+YjYlojwapkN6IAdXYKwH5kJYgihIJiwdJkbPYj/5INZU4c8Vofg7iayAJhCI5jCQRAGrYh2LHkZVxj/h4kytZJxcJExGpgpf4RuKFk7ImlBUZBC2JjvdAaRCAfmCni/8YIgiZj0T5kftylEg5IP8+6YFeF5AO6ZFUOZVFuXcMWYhPuYIoNoFdaZM5mYxjSZbiWIzMAo1pGZTrGJVfWYVtOZJPeYi7Fw9cuUrMB5ZrWTg7KQzZqBxO+ZTqeJeDqT2FmTYq+Jc5WI+AKZhS2ZiuYpVXmQwBoCGHCZhGZZlhqZOauZnlAmpMiQDitpGPMZSu+ZqMqYR5qZfS9Zc9SYmwaZeiWWaPKQqLeIs0WUwJuJCY6VKlaZpReJjBiZtwppvF+Y2zSZvjyIGU6JXgt5sq15sxh4OJqZi7GJrO+Zw1c5xGlouXSJmpWB/XKZ6kGZ3SiQbnCHrD8JlOGJ7seTXaiXLm2UgC2Z3e+Z3NeZ//EEWerZCVk3mM6bkiSRig9pmd7vmeMxCfLIig1PdDs4edAlqVBBpz5siF6PmfIAqVGJqhybOhnNEA9DmZyBmi09kXDZqbsTlJ+ZkGSimXC5CiFTqcMEqijjOjkjBvEGKJCXpZI/pIL7plJsogUZeRy8miTqoD4MmghKaSRemjT6CVvwCCrDmkg7WjPLqMypWkwjGbgHdoR3qhXvql2fWgiGkOcydvP1mmsZGmtBejcWSlOEAKWbqncSqn64WmdjqlamqkY1KDDrF6rUaO/vmkUWidgVqkjwqHrumWEmJznHdnjJqpo1SXdDqo7iOmY1ByNzePXPqdvEilZzqaePqF/5YaJKrpp1DqqBfYqZ7KgJQKbtAWJGwIq7FKl6gqpamqX6v6eM44eyuqqcg6kdIYrIkHqlD6hC7iT7zaqyl5isxqYniKqIrKqh86rTsAqcCqqovgrIcqeMZaqi06p+A6h4C6rvZmpVGne8earPSqrBnoruIqY4Xapn3Zq+6mpy5ZrwK7qUtXqwXrSORKj00HrfM6sPXqq8VisO15h/c3kw3rsA97qhEbru/6e2zKrzdQjgxrseiarv4aqfgacQmLANxmjE3qrdSqlih7rSHJB5qXewx7sTBrpjNLs2TITuSKc5e6lSVrstS6nj5rrbJwkVRXsS1btGkDsT3brhKLsP/CmG+5GoFPC7VRW6dUW7XsykZianxDC7Bca7QnO7VgG7aYMLatenOutrOfBaZry7bjmqRSc6BEe7ZoW3EL+oYpy5JLu68gSyBvG5cvK7dEuqyBK6zpY6JlmLiKO1JqW7lK+7VBA7mQB41Nq7OT268sy6l1W4of+ze5iH2S+7mUS7ejq4CoeJZm6bmqy7ONi7mti0jkubKzG7OBaT63m5B3m20tG2qyu7ug+7eWK5uvUJpCq60Nybd5KKvJm6+ZW7rYh7P+VrzGS7vTW6X+Y5WIir3OC70ZK7Pu97vAa7NLZn+dOwC7Sr7la6HUu7HNiWZKCXAsq73b+6zd673h837/BMBwzwu/8Vu7Bnynj/ux4UfA8Su187uJVfSg7LvADJys8nuw/euYEXy1yjGyOVvBDXzBGTzC0Pm/QkZ1pwun+ru/afvA+Pm9NCZlTUm4IGzB6nrAo5m+bzCb4fuF2bvCLNzCOfzC9etdogoUFFzDJCm9QwzBRXxx3QDFixrEvNvERAxnDmSpubetAavEfSvEVozAUhx8XmzD9hrGgOhBGQcNAoygJFvGIXzGaNyeeTSWbSzDDXCScBzHDjzH5wu0fJpxApy/oLvH2ti7fnzF+YPHU2zIy5LIXnRm1+dtjUzF4QHJwMh35tm5HerIfIy8JIzAk1qAUUzIwebJXYrJ/zPExnvaw4WMymbMxKpMx+prclt8ypbMv7NMhsQywfb3yrAcy3mMvlYUupELzMG8xHK8y98otiiWt32Ky7lMsMzMuI2gKBwszcm8uNWMwa8AeQw3yHlsqNvctd1My8DVyklczh1JzGnctln7a8jMzsI8zOdMmJcxzr9cuPTczvfszdfMC8TLz9o8zcv8z7Nqu4pByfFM0AVt0LKM0L6LBccnzw7dz8oc0RIN0EapFPr8vheN0cK80d5yHr5MziJtziQtqdVr0uv80BB90CttzUX30SGd0l9cxTN9r3Lk0TZ90zid08AMyjvtzOMM1EEdvX9a1O34DEeN1Ekt1IHC1P8lrbtRXVRETdXK89IwfdUyrdU6jMVPDdVe3Yb2DNaZOdZkXdaN+tVonR40PM9sbdYa/dYFG9dyPdd0ndV2vXZqvdZ6fUx9DXx/XXeBrdRROtinVtiTd9hRW62KDbhGzdhd7dhLHdl2K9aUndeWLdiYfdebzdmdHS6fXSWlW9mdzdel3dGhLdqj/cirndmA3Nqu/dqsgsixHQhWbduwndtTsdu8fdu+/dvAHdycgtvDLZYobdzHndzhVNzMHSnOnRDQHd1kE8phWd3WHbMqNd3sp93bzd1u7d1YR9uoHdPzjMPMDN7hLd76TN4Cx97tLdruPNHxLd/zrdPw7Uf4nd//cl3fLC1T5n3e6I3MAI7PA07gr63aio3XCs7cyO3dXP3gBX7D+x1MCU7hFT7eF76QGa7hG/7eHc5z/e3f/43dsfjhIB7iZz3i5a3iKx7iKN5+JW7i+u3iHgfjMV7g6j3HE77jLN7jaFzjNn7iOK7bOg7kZZ3Y+/3jSr7kTA7fRF7k6X3k/JjkT47eDM7UTp7lPG7lfo3lXp7LW17UU07lLAPmyr3caI44as5/Yj7mBj3jDhrncj7NB17Vdt7mwpLngLjnd07Ffn6+gB7oQTzoG1vohr6/ZS7RXb7oEN3oCH3mfF7lb87ail7pzX3pQEDpmt4qnA7NbP7p7n3ZR/7olpAe04jONaed6lBuvi7u6aQOKKGe6bN+N7Xu4K7O4rA+4qi+65Yc6udq67de6sLuT8Re7Hl97LKu7L2O483u7Mduka0O7JE+7dFe7NNO7cnu7HWx7dk+69vO7d3u7YcK7uGu6ePe6dVu7Ri97uRe7uZe11ae7nwO7/Eu7/OO7/mu79LO7/ZO5XRueb/u7js78ATv7+YeAgA7';
 
+  /**
+   * Constructor for creating a new instance of the MyClass.
+   * @param auth - The authentication service.
+   * @param router - The router service.
+   */
   constructor(
     public auth: AuthService,
     private router: Router
   ) {
   }
 
+  /**
+   * Initialize the login form with email and password fields
+   */
   ngOnInit() {
     this.loginForm = new FormGroup({
+      /** Email input with required and email validators */
       email: new FormControl(' ', [Validators.required, Validators.email]),
+      /** Password input with required and min length validators */
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     })
   }
 
+  /**
+   * Submits the login form if it is valid
+   */
   submit() {
+    // Check if the login form is invalid
     if (this.loginForm.invalid) {
       return;
     }
+    // Set submitted flag to true
     this.submitted = true;
+    // Create user object with form values
     const user: UserModel = {
       email: this.loginForm.value.email,
       password: this.loginForm.value.password,
       returnSecureToken: true,
     }
+    // Call the login method and subscribe to the result
     this.auth.login(user).subscribe(res => {
+      // Reset the login form
       this.loginForm.reset()
+      // Navigate to the admin dashboard
       this.router.navigate(['/admin', 'dashboard'])
+      // Set submitted flag to false
       this.submitted = false
     }), () => {
+      // Set submitted flag to false in case of error
       this.submitted = false
     }
   }

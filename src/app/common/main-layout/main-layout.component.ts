@@ -14,23 +14,32 @@ export class MainLayoutComponent {
 
   type = 'Tshirts'
 
+  /**
+   * Constructor for creating an instance of the class
+   * @param router - the router for navigating between views
+   * @param productService - the service for managing product data
+   */
   constructor(
     private router: Router,
     private productService: ProductService,
   ) {
   }
 
-  ngOnInit() {
-  }
 
+  /**
+   * Set the type of the product
+   * @param type - The type of the product
+   */
   setType(type: string) {
     this.type = type;
+    // Redirect to the homepage with query param if the type is not 'Cart'
     if (this.type !== 'Cart') {
       this.router.navigate(['/'], {
         queryParams: {
           type: this.type
         }
       });
+      // Set the type in the productService
       this.productService.setType(this.type);
     }
   }

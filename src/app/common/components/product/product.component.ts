@@ -19,15 +19,20 @@ export class ProductComponent {
   @Input()
   product: ProductModel;
 
+  /**
+   * Constructor for the class.
+   * @param {ProductService} productService - The product service dependency.
+   */
   constructor(
     private productService: ProductService
   ) {
   }
 
-  ngOnInit(): void {
-  }
-
+  /**
+   * Add a product to the cart
+   * @param product - The product to be added to the cart
+   */
   addToCart(product: ProductModel) {
-    this.productService.addProductsToCart(product)
+    this.productService.addProductsToCart(product);
   }
 }

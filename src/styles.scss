@@ -2,23 +2,24 @@
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
 @import 'primeicons/primeicons.css';
+@import 'primeflex/primeflex.css';
+@import 'primeflex/themes/primeone-light.css';
+
 
 html {
   background: #f4f6f7;
 }
 
-p-card.p-element {
-  padding: 10px;
-  margin: 10px;
+a, a:link, a:visited {
+  text-decoration: none;
+  color: #282828;
+  transition: all .2s ease-in;
+  cursor: pointer;
 }
-
-
-
 
 ul {
   list-style: none;
 }
-
 
 .navbar {
   display: flex;

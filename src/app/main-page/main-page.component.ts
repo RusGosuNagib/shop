@@ -18,15 +18,22 @@ export class MainPageComponent implements OnInit {
 
   products$: Observable<ProductModel[]>;
 
+  /**
+   * Constructs a new instance of the class.
+   * @param productService - The product service to be injected.
+   */
   constructor(
     protected productService: ProductService
   ) {
   }
 
+  /**
+   * Initializes the component
+   */
   ngOnInit(): void {
-    this.products$ = this.productService.getAll()
+    // Retrieves all products and assigns the result to the products$ variable
+    this.products$ = this.productService.getAll();
   }
-
 
   protected readonly console = console;
 }
