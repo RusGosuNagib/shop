@@ -1,7 +1,7 @@
 
-<p-card header="Login" [style]="{ width: '45%' }">
+<p-card header="Добавить" [style]="{ width: '45%' }">
 <form [formGroup]="form" (ngSubmit)="submit()">
-  <h2 class="text-center">Добавить</h2>
+<!--  <h2 class="text-center">Добавить</h2>-->
 
   <div class="form-control">
     <label for="type">Тип</label>
@@ -24,8 +24,16 @@
   </div>
 
   <div class="form-control">
-    <label for="photo">Фото</label>
-    <quill-editor id="photo" formControlName="photo"></quill-editor>
+<!--    <label for="type">Фото:</label>-->
+
+<!--    <div *ngIf="!isLoading; else upload">!uploadedFile</div>-->
+<!--    <ng-template #upload>-->
+<!--      <p class="text-center">upload...</p>-->
+<!--    </ng-template>-->
+<!--    <input id="input" type="file" accept="image/png, image/gif, image/jpeg" formControlName="photo" (change)="handleFiles($event)" />-->
+<!--    <div *ngIf="uploadedFile">-->
+<!--      <img [src]="uploadedFile">-->
+<!--    </div>-->
   </div>
 
   <div class="form-control">

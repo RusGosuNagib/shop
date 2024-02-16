@@ -1,5 +1,5 @@
 export class ProductModel {
-  type?: string
+  type?: { name: string; value: string }
   title?: string
   photo?: string
   info?: string

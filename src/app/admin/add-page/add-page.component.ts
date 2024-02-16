@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {CommonModule} from "@angular/common";
-import {QuillModule} from "ngx-quill";
 import {ProductService} from "../../common/product.service";
 import {Router} from "@angular/router";
 import {ProductModel} from "../../models/product.model";
@@ -13,7 +12,7 @@ import {CardModule} from "primeng/card";
 @Component({
   selector: 'app-add-page',
   standalone: true,
-    imports: [CommonModule, ReactiveFormsModule, QuillModule, CKEditorModule, CardModule],
+    imports: [CommonModule, ReactiveFormsModule, CKEditorModule, CardModule],
   templateUrl: './add-page.component.html',
   styleUrl: './add-page.component.scss'
 })

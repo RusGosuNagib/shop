@@ -6,24 +6,37 @@ import {Subscription} from "rxjs";
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {SearchPipe} from "../../common/search.pipe";
-import { TableModule } from 'primeng/table';
+import {TableModule} from 'primeng/table';
 import {ButtonModule} from "primeng/button";
-import {RatingModule} from "primeng/rating";
-import {TagModule} from "primeng/tag";
 import {InputTextModule} from "primeng/inputtext";
-import { ImageModule } from 'primeng/image';
+import {ImageModule} from 'primeng/image';
 import {CardModule} from "primeng/card";
 
+export class OpenCloseComponent {
+  isOpen = true;
 
+  toggle() {
+    this.isOpen = !this.isOpen;
+  }
+
+}
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [
-    RouterLink, CommonModule, FormsModule, SearchPipe, TableModule, ButtonModule, RatingModule, TagModule, InputTextModule, ImageModule, CardModule,
+    RouterLink,
+    CommonModule,
+    FormsModule,
+    SearchPipe,
+    TableModule,
+    ButtonModule,
+    InputTextModule,
+    ImageModule,
+    CardModule,
   ],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
+  styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent {
 

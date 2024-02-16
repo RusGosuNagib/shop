@@ -1,15 +1,12 @@
-<div class="text-center product-flex-cont">
-  <div class="product-flex-box"><h2>{{ product.title }}</h2></div>
+<p-card class="product_card" [routerLink]="['/product', product.id]">
+  <div class="text-center product-flex-cont">
 
-  <div class="product-flex-box product-card-container">
+    <div><img [src]="product.photo" alt=""></div>
 
-    <img [src]="product.photo" alt="">
+    <div class="goods__item-link">
+      <a [routerLink]="['/product', product.id]" class="msec-click">{{ product.title }}</a>
+    </div>
+    <div>{{ product.price }} ₽</div>
+
   </div>
-
-  <div class="product-flex-box">{{ product.price }}</div>
-
-  <div class="product-flex-box">
-    <button [routerLink]="['/product', product.id]" class="btn btn-dark">Open</button>
-    <button [routerLink]="['/cart']" class="btn btn-dark" (click)="addToCart(product)">Add to cart</button>
-  </div>
-</div>
+</p-card>

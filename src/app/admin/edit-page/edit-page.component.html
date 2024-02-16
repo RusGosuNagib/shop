@@ -1,22 +1,29 @@
+
+<p-card header="Изменить продукт" [style]="{ width: '100%' }">
 <div *ngIf="form; else loading">
   <form [formGroup]="form" (ngSubmit)="submit()">
 
-    <h2 class="text-center">Изменить продукт</h2>
-
     <div class="form-control">
       <label for="type">Тип</label>
-      <select id="type" formControlName="type">
-        <option value="Tshirts">Футболки</option>
-        <option value="Shoes">Обувь</option>
-        <option value="Accessories">Аксессуары</option>
-      </select>
+
+      <p-dropdown id="type" formControlName="type"
+                  [options]="typesOfProducts" optionLabel="name"  placeholder="Тип"></p-dropdown>
+
       <div *ngIf="form.get('type').touched && form.get('type').invalid" class="validation">
         <small *ngIf="form.get('type').errors.required">Выберите тип</small>
       </div>
     </div>
+
     <div class="form-control">
-      <label for="title">Название</label>
-      <input id="title" type="title" formControlName="title">
+      <label for="title">Наименование товара</label>
+
+      <p-inputGroup>
+        <p-inputGroupAddon>
+          <i class="pi pi-user"></i>
+        </p-inputGroupAddon>
+        <input pInputText placeholder="Наименование товара" id="title" type="text" formControlName="title"/>
+      </p-inputGroup>
+
       <div *ngIf="form.get('title').touched && form.get('title').invalid" class="validation">
         <small *ngIf="form.get('title').errors.required">Введите название</small>
       </div>
@@ -24,12 +31,19 @@
 
     <div class="form-control">
       <label for="type">Фото:</label>
+            <div *ngIf="isLoading;">
+              <p-progressBar mode="indeterminate" [style]="{ height: '6px' }"></p-progressBar>
+            </div>
 
-            <div *ngIf="!isLoading; else upload">!uploadedFile</div>
-            <ng-template #upload>
-              <p class="text-center">upload...</p>
-            </ng-template>
-            <input id="input" type="file" accept="image/png, image/gif, image/jpeg" formControlName="photo" (change)="handleFiles($event)" />
+
+      <p-fileUpload mode="basic"
+                    chooseLabel="Choose"
+                    accept="image/*"
+                    type="file"
+                    (onSelect)="handleFiles($event)"
+      ></p-fileUpload>
+
+
             <div *ngIf="uploadedFile">
               <img [src]="uploadedFile">
             </div>
@@ -58,3 +72,4 @@
 <ng-template #loading>
   <p class="text-center">Loading...</p>
 </ng-template>
+</p-card>

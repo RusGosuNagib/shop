@@ -1,15 +1,18 @@
-.product-flex-cont {
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-content: center;
-  height: 650px;
+
+img {
+  width: 100%;
+  object-fit: cover;
 }
-.product-card-container {
-  max-height: 415px;
+
+
+
+a, a:link, a:visited {
+  text-decoration: none;
+  color: #282828;
+  transition: all .2s ease-in;
+  cursor: pointer;
 }
-.product-flex-box{
-  padding: 10px;
-  flex: 2 1 100px;
-  align-self: center;
+
+.product_card {
+  cursor: pointer;
 }

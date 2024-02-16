@@ -10,6 +10,7 @@ import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { InputTextModule } from 'primeng/inputtext';
 import {ImageModule} from "primeng/image";
+import {StyleClassModule} from 'primeng/styleclass';
 
 
 

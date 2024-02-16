@@ -28,4 +28,5 @@ export class MainPageComponent implements OnInit {
   }
 
 
+  protected readonly console = console;
 }

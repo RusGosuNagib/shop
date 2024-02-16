@@ -3,7 +3,6 @@ import {ProductService} from "../common/product.service";
 import {Router} from "@angular/router";
 import {ProductModel} from "../models/product.model";
 import {CommonModule} from "@angular/common";
-import {QuillEditorComponent} from "ngx-quill";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {OrderService} from "../common/order.service";
 import {OrderModel} from "../models/order.model";
@@ -13,7 +12,6 @@ import {OrderModel} from "../models/order.model";
   standalone: true,
   imports: [
     CommonModule,
-    QuillEditorComponent,
     ReactiveFormsModule
   ],
   templateUrl: './cart-page.component.html',

@@ -1,35 +1,48 @@
 <div *ngIf="product$ | async as product; else loading">
-  <div class="product">
-    <div class="header right">
-      <button routerLink="/" class="btn btn-dark">Back</button>
-    </div>
 
-    <div class="flex">
-      <div class="item text-center">
-        <h2>{{ product.title }}</h2>
-
-        <div class="flex-center">
-          <quill-view-html [content]="product.photo"></quill-view-html>
-        </div>
-
-        <div>
-          <h2>Price: {{ product.price }} $</h2>
-          <button [routerLink]="['/cart']" class="btn btn-dark" (click)="addToCart(product)">Add to cart</button>
-        </div>
-      </div>
-
-      <div class="item">
-        <h2>Information:</h2>
-
-        <div>
-          <quill-view-html [content]="product.info"></quill-view-html>
-        </div>
-
-      </div>
-    </div>
+  <div class="header right">
+    <p-button class="p-button-sm" routerLink="/">Назад</p-button>
   </div>
-</div>
-<ng-template #loading>
-  <p class="text-center">Loading...</p>
-</ng-template>
 
+  <p-card>
+    <div class="grid-container">
+      <div *ngIf="product.photo" class="image-ar">
+        <img [src]="product.photo" alt="">
+      </div>
+      <div class="title-ar"><h2>{{ product.title }}</h2></div>
+      <div class="price-ar"><h2>Price: {{ product.price }}</h2></div>
+      <div class="buy-ar">
+        <p-button [routerLink]="['/cart']" class="btn btn-dark" (click)="addToCart(product)">Добавить в корзину
+        </p-button>
+      </div>
+    </div>
+  </p-card>
+  <p-card>
+
+    <ckeditor [data]="product.info"></ckeditor>
+
+  </p-card>
+</div>
+
+
+<ng-template #loading>
+  <p-card>
+    <div class="grid-container">
+      <div class="image-ar">
+        <p-skeleton width="400px" height="400px"></p-skeleton>
+      </div>
+      <div class="title-ar">
+        <p-skeleton width="10rem" styleClass="mb-2" borderRadius="16px"></p-skeleton>
+      </div>
+      <div class="price-ar">
+        <p-skeleton width="5rem" styleClass="mb-2" borderRadius="16px"></p-skeleton>
+      </div>
+      <div class="buy-ar">
+        <p-skeleton width="10rem" styleClass="mb-2"></p-skeleton>
+      </div>
+    </div>
+  </p-card>
+  <p-card>
+    <p-skeleton width="100%" height="150px"></p-skeleton>
+  </p-card>
+</ng-template>

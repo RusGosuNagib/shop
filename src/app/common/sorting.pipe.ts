@@ -9,7 +9,7 @@ export class SortingPipe implements PipeTransform {
 
   transform(products: ProductModel[], type = '') {
     return products.filter((product: ProductModel) => {
-      return product.type === type;
+      return product.type.value === type;
     });
   }
 

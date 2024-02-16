@@ -10,7 +10,7 @@ export class FileUpload {
     fileReader.onload = result => {
       this.b64Image$.next(result.target.result.toString())
     }
-    fileReader.readAsDataURL(fileList.target.files[0]);
+    fileReader.readAsDataURL(fileList.files[0]);
     return this.b64Image$
   }
 

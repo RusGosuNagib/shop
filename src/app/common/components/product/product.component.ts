@@ -1,15 +1,15 @@
 import {Component, Input} from '@angular/core';
 import {ProductModel} from "../../../models/product.model";
-import {QuillViewHTMLComponent} from "ngx-quill";
 import {RouterLink} from "@angular/router";
 import {ProductService} from "../../product.service";
+import {CardModule} from "primeng/card";
 
 @Component({
   selector: 'app-product',
   standalone: true,
   imports: [
-    QuillViewHTMLComponent,
-    RouterLink
+    RouterLink,
+    CardModule
   ],
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss'
