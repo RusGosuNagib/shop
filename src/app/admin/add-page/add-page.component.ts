@@ -8,11 +8,12 @@ import {ProductModel} from "../../models/product.model";
 import {CKEditorModule} from "@ckeditor/ckeditor5-angular";
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import Editor from "@ckeditor/ckeditor5-build-classic";
+import {CardModule} from "primeng/card";
 
 @Component({
   selector: 'app-add-page',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, QuillModule, CKEditorModule],
+    imports: [CommonModule, ReactiveFormsModule, QuillModule, CKEditorModule, CardModule],
   templateUrl: './add-page.component.html',
   styleUrl: './add-page.component.scss'
 })

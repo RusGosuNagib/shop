@@ -6,19 +6,28 @@ import {Subscription} from "rxjs";
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {SearchPipe} from "../../common/search.pipe";
+import { TableModule } from 'primeng/table';
+import {ButtonModule} from "primeng/button";
+import {RatingModule} from "primeng/rating";
+import {TagModule} from "primeng/tag";
+import {InputTextModule} from "primeng/inputtext";
+import { ImageModule } from 'primeng/image';
+import {CardModule} from "primeng/card";
+
+
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [
-    RouterLink, CommonModule, FormsModule, SearchPipe,
+    RouterLink, CommonModule, FormsModule, SearchPipe, TableModule, ButtonModule, RatingModule, TagModule, InputTextModule, ImageModule, CardModule,
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent {
 
-  products: any[] = []
+  products: ProductModel[] = []
   pSub: Subscription;
   rSub: Subscription;
   productName: string;
@@ -50,4 +59,5 @@ export class DashboardComponent {
     })
   }
 
+  protected readonly console = console;
 }

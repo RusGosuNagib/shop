@@ -1,18 +1,28 @@
-<nav class="navbar bg-dark">
-  <h2>Магаз</h2>
-  <ul>
-    <li routerLinkActive="active">
-      <a (click)="setType('Tshirts')">Футболки</a>
-    </li>
-    <li routerLinkActive="active">
-      <a (click)="setType('Shoes')">Обувь</a>
-    </li>
-    <li routerLinkActive="active">
-      <a (click)="setType('Accessories')">Аксессуары</a>
-    </li>
-    <li routerLinkActive="active">
-      <a (click)="setType('Cart')" routerLink="/cart">Корзина</a>
-    </li>
-  </ul>
-</nav>
+<div class="header">
+  <div class="header__li">
+    Mагаз1
+  </div>
+  <div class="header_empty"></div>
+  <div class="header__li" routerLinkActive="active">
+    <a (click)="setType('Tshirts')">Футболки</a>
+  </div>
+  <div class="header__li">
+    <a (click)="setType('Shoes')">Обувь</a>
+  </div>
+  <div class="header__li">
+    <a (click)="setType('Accessories')">Аксессуары</a>
+  </div>
+  <div class="header__li">
+    <a (click)="setType('Cart')" routerLink="/cart">Корзина</a>
+  </div>
+</div>
 <router-outlet></router-outlet>
+
+
+
+
+
+
+
+
+
