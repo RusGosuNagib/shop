@@ -1,36 +1,36 @@
-
 <p-card header="Изменить продукт" [style]="{ width: '100%' }">
   <div *ngIf="form; else loading">
     <form [formGroup]="form" (ngSubmit)="submit()">
 
-      <div class="form-control">
-        <label for="type">Тип</label>
+      <div>
 
-        <p-dropdown id="type" formControlName="type"
-                    [options]="typesOfProducts" optionLabel="name"  placeholder="Тип"></p-dropdown>
 
-        <div *ngIf="form.get('type').touched && form.get('type').invalid" class="validation">
-          <small *ngIf="form.get('type').errors.required">Выберите тип</small>
+        <div class="m-5">
+
+          <p-dropdown [style]="{width: '100%'}" id="type" formControlName="type" [options]="typesOfProducts"
+                      optionLabel="name" placeholder="Тип"></p-dropdown>
+
+          <div *ngIf="form.get('type').touched && form.get('type').invalid" class="validation">
+            <small *ngIf="form.get('type').errors.required">Выберите тип</small>
+          </div>
+
+        </div>
+        <div class="m-5">
+          <p-inputGroup [style]="{width: '100%'}">
+            <p-inputGroupAddon>
+              <i class="pi pi-user"></i>
+            </p-inputGroupAddon>
+            <input pInputText placeholder="Наименование товара" id="title" type="text" formControlName="title"/>
+          </p-inputGroup>
+
+          <div *ngIf="form.get('title').touched && form.get('title').invalid" class="validation">
+            <small *ngIf="form.get('title').errors.required">Введите название</small>
+          </div>
         </div>
       </div>
 
-      <div class="form-control">
-        <label for="title">Наименование товара</label>
+      <div class="m-5">
 
-        <p-inputGroup>
-          <p-inputGroupAddon>
-            <i class="pi pi-user"></i>
-          </p-inputGroupAddon>
-          <input pInputText placeholder="Наименование товара" id="title" type="text" formControlName="title"/>
-        </p-inputGroup>
-
-        <div *ngIf="form.get('title').touched && form.get('title').invalid" class="validation">
-          <small *ngIf="form.get('title').errors.required">Введите название</small>
-        </div>
-      </div>
-
-      <div class="form-control">
-        <label for="type">Фото:</label>
         <div *ngIf="isLoading;">
           <p-progressBar mode="indeterminate" [style]="{ height: '6px' }"></p-progressBar>
         </div>
@@ -44,28 +44,31 @@
         ></p-fileUpload>
 
 
-        <div *ngIf="uploadedFile">
+        <div *ngIf="uploadedFile" class="image-container">
           <img [src]="uploadedFile">
         </div>
+
       </div>
 
-      <div class="form-control">
-        <label for="info">Информация:</label>
+      <div class="m-5">
         <ckeditor id="info" formControlName="info" [editor]="Editor" data="<p>Info</p>"></ckeditor>
       </div>
 
-      <div class="form-control">
-        <label for="price">Цена</label>
-        <input id="price" type="price" formControlName="price">
+      <div class="m-5">
+
+        <p-inputGroup [style]="{width: '30%'}">
+          <p-inputGroupAddon>
+            <i class="pi pi-user"></i>
+          </p-inputGroupAddon>
+          <input pInputText placeholder="Цена" id="price" type="text" formControlName="price"/>
+        </p-inputGroup>
+
         <div *ngIf="form.get('price').touched && form.get('price').invalid" class="validation">
           <small *ngIf="form.get('price').errors.required">Введите цену</small>
         </div>
       </div>
 
-      <button type="submit" class="btn btn-primary btn-block"
-              [disabled]="form.invalid || submitted">Обновить
-      </button>
-
+      <p-button label="Подтвердить" type="submit" [disabled]="form.invalid || submitted"></p-button>
     </form>
   </div>
 

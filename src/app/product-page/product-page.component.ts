@@ -16,7 +16,15 @@ import {SkeletonModule} from "primeng/skeleton";
   selector: 'app-product-page',
   standalone: true,
   imports: [
-    RouterLink, CommonModule, NgIf, CKEditorModule, PaginatorModule, ReactiveFormsModule, CardModule, ButtonModule, SkeletonModule
+    RouterLink,
+    CommonModule,
+    NgIf,
+    CKEditorModule,
+    PaginatorModule,
+    ReactiveFormsModule,
+    CardModule,
+    ButtonModule,
+    SkeletonModule,
   ],
   templateUrl: './product-page.component.html',
   styleUrl: './product-page.component.scss'

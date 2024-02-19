@@ -44,11 +44,11 @@ export class OrderService {
       .pipe(
         map(res => {
           // Transform the response object into an array of order models
-          return Object.keys(res)
+          return res ? Object.keys(res)
             .map(key => ({
               ...res[key],
               id: key,
-            }))
+            })) : []
         })
       )
   }

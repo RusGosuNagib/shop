@@ -1,44 +1,47 @@
+<p-card >
 <div *ngIf="orders.length; else noOrders">
   <h2 class="text-center">Table of orders:</h2>
 
-  <table>
-    <thead>
-    <tr>
-      <th>Date</th>
-      <th>Phone</th>
-      <th>Name</th>
-      <th>Address</th>
-      <th>Products</th>
-      <th>Price</th>
-      <th>Status</th>
-    </tr>
-    </thead>
+  <p-table [value]="orders" [tableStyle]="{'min-width': '60rem'}">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>ID</th>
+        <th>Дата</th>
+        <th>Телефон</th>
+        <th>Имя</th>
+        <th>Адрес</th>
+        <th>Продукты</th>
+        <th>Цена</th>
+        <th>Статус</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-order>
+      <tr>
+        <td>{{ order.id }}
+        <td>{{ order.date| date : 'short' }}
+        </td>
+        <td>{{ order.phone }}</td>
+        <td>{{ order.name }}</td>
+        <td>{{ order.address }}</td>
+        <td>
+          <div *ngFor="let product of order.products">{{ product.title }}</div>
+        </td>
+        <td>
+          <div class="text-center">{{ order.price }}$</div>
+          <div class="text-center">{{ order.payment.name }}</div>
+        </td>
 
-    <tbody>
-    <tr *ngFor="let order of orders">
-      <td>{{
-          order.date
-          // | date : 'medium'
-        }}
-      </td>
-      <td>{{ order.phone }}</td>
-      <td>{{ order.name }}</td>
-      <td>{{ order.address }}</td>
-      <td>
-        <div *ngFor="let product of order.products">{{ product.title }}</div>
-      </td>
-      <td>
-        <div class="text-center">{{ order.price }}$</div>
-        <div class="text-center">{{ order.payment }}</div>
-      </td>
-      <td>
-        <button class="btn btn-danger" (click)="remove(order.id)">Complited</button>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+        <td>
+          <p-button (click)="remove(order.id)">Выполнен</p-button>
+        </td>
+
+      </tr>
+    </ng-template>
+  </p-table>
+
 </div>
 
 <ng-template #noOrders>
   <p class="text-center">No orders...</p>
 </ng-template>
+</p-card>

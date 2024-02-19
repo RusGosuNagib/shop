@@ -4,12 +4,17 @@ import {Subscription} from "rxjs";
 import {Router} from "@angular/router";
 import {ProductService} from "../../common/product.service";
 import {CommonModule} from "@angular/common";
+import {ButtonModule} from "primeng/button";
+import {ImageModule} from "primeng/image";
+import {SharedModule} from "primeng/api";
+import {TableModule} from "primeng/table";
+import {CardModule} from "primeng/card";
 
 
 @Component({
   selector: 'app-orders-page',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ButtonModule, ImageModule, SharedModule, TableModule, CardModule],
   templateUrl: './orders-page.component.html',
   styleUrl: './orders-page.component.scss'
 })
@@ -70,6 +75,5 @@ export class OrdersPageComponent implements OnInit, OnDestroy {
       this.orders = this.orders.filter(order => order.id !== id);
     });
   }
-
 
 }
