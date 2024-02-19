@@ -17,11 +17,11 @@
       </div>
     </div>
   </p-card>
-  <p-card>
 
-    <ckeditor [data]="product.info"></ckeditor>
-
+  <p-card class="p-5">
+    <div [innerHTML]="product.info"></div>
   </p-card>
+
 </div>
 
 
@@ -46,3 +46,4 @@
     <p-skeleton width="100%" height="150px"></p-skeleton>
   </p-card>
 </ng-template>
+

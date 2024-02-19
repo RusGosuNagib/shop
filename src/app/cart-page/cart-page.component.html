@@ -1,67 +1,82 @@
-<div class="container" *ngIf="productsInCart.length>0; else empty">
-  <h2 class="text-center">Your order:</h2>
+<div *ngIf="productsInCart.length>0; else empty">
+  <h2 class="text-center">Ваш заказ:</h2>
 
-  <table>
-    <tbody>
-    <tr *ngFor="let product of productsInCart; let i = index">
-      <td>{{ product.type }}</td>
-      <td>{{ product.title }}</td>
-      <td>{{ product.price }}</td>
-      <td>
-        <button (click)="deleteFromCart(product)" class="btn btn-danger">Delete</button>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+  <p-table [value]="productsInCart" [tableStyle]="{'min-width': '60rem'}">
+
+    <ng-template pTemplate="body" let-product>
+      <tr>
+        <td>{{ product.title }}</td>
+        <td>
+          <p-image [src]="product.photo" [alt]="" width="100" [preview]="true"></p-image>
+        </td>
+        <td>{{ product.price | currency:'RUB' }}</td>
+        <td>
+
+
+          <p-button icon="pi pi-trash" severity="danger" (click)="deleteFromCart(product.id)"></p-button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div class="flex align-items-center justify-content-between">
+        In total there are {{ productsInCart ? productsInCart.length : 0 }} products.
+      </div>
+    </ng-template>
+  </p-table>
+
   <hr>
 
   <b class="right">Total:{{ totalPrice }}</b>
 
-  <h2 class="text-center">Delivery:</h2>
 
   <div *ngIf="added" class="text-center text-success">{{ added }}</div>
+  <p-card header="Доставка" [style]="{ width: '45%' }">
+    <form [formGroup]="form" (ngSubmit)="submit()">
 
-  <form [formGroup]="form" (ngSubmit)="submit()">
 
-    <div class="form-control">
-      <label for="name">Имя</label>
-      <input id="name" formControlName="name">
-      <div *ngIf="form.get('name').touched && form.get('name').invalid" class="validation">
+      <p-inputGroup>
+        <p-inputGroupAddon>
+          <i class="pi pi-user"></i>
+        </p-inputGroupAddon>
+        <input pInputText placeholder="Имя" id="name" type="text" formControlName="name">
+
+      </p-inputGroup>
+      <div *ngIf="form.get('name').touched && form.get('name').invalid" class="text-red-900">
         <small *ngIf="form.get('name')?.errors?.required">Введите свое имя</small>
       </div>
-    </div>
 
-    <div class="form-control">
-      <label for="phone">Номер телефона</label>
-      <input id="phone" formControlName="phone">
+
+      <p-inputGroup>
+        <p-inputGroupAddon>
+          <i class="pi pi-user"></i>
+        </p-inputGroupAddon>
+        <p-inputMask [style]="{width: '553px'}" mask="+9 (999) 999-99-99" formControlName="phone"
+                     placeholder="Номер телефона"></p-inputMask>
+      </p-inputGroup>
       <div *ngIf="form.get('phone').touched && form.get('phone').invalid" class="validation">
         <small *ngIf="form.get('phone')?.errors?.required">Введите свой номер телефона</small>
       </div>
-    </div>
 
-    <div class="form-control">
-      <label for="address">Адрес</label>
-      <input id="address" formControlName="address">
+      <p-inputGroup>
+        <p-inputGroupAddon>
+          <i class="pi pi-user"></i>
+        </p-inputGroupAddon>
+        <input pInputText placeholder="Адрес" id="address" type="text" formControlName="address">
+
+      </p-inputGroup>
       <div *ngIf="form.get('address').touched && form.get('address').invalid" class="validation">
         <small *ngIf="form.get('address')?.errors?.required">Введите свой адрес</small>
       </div>
-    </div>
 
-    <div class="form-control">
-      <label for="payment">Способ оплаты</label>
-      <select id="payment" formControlName="payment">
-        <option value="Card">Карта</option>
-        <option value="Cash">Наличные</option>
-      </select>
-    </div>
+      <p-dropdown id="type" formControlName="payment" optionLabel="name"
+                  [options]="paymentType" placeholder="Способ оплаты"></p-dropdown>
+      <br>
+      <p-button id="submit" type="submit" icon="pi pi-check" label="Заказать"
+                [disabled]="form.invalid || submitted">
+      </p-button>
 
-    <button id="submit" type="submit" class="btn btn-primary btn-block"
-            [disabled]="form.invalid || submitted">
-      logon
-    </button>
-
-  </form>
-
+    </form>
+  </p-card>
 </div>
 
 <ng-template #empty>

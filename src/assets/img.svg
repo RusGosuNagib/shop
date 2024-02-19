@@ -1,11 +1,10 @@
 <svg version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
      viewBox="0 0 300.000000 250.000000"
-     color-interpolation-filters="sRGB">
-
+     color-interpolation-filters="linearRGB">
 
   <g fill="#f3c676" transform="translate(82.86000061035156,97.2450008392334)">
     <g>
-      <g mask="url(#03a82d8d-5101-4841-aec8-97ab056ea375)">
+      <g mask="url(#triMask)">
 
         <g>
           <polyline x="0" y="0" fill="#f3c676" points="0,0 55.5099983215332,0 55.5099983215332,55.5099983215332, 0,0"
@@ -29,7 +28,7 @@
 
 
 
-  <mask id="03a82d8d-5101-4841-aec8-97ab056ea375">
+  <mask id="triMask">
     <g>
       <g fill="#f3c676">
         <polyline x="0" y="0"
@@ -37,6 +36,7 @@
                   transform="translate(118.77000045776367, 0)"></polyline>
 
       </g>
+
       <g transform="translate(0,5)" stroke="#000" stroke-width="3" fill="#000">
         <g transform="scale(1)">
           <g>
@@ -46,6 +46,7 @@
           </g>
         </g>
       </g>
+
       <g transform="translate(0,5)" fill="#f3c676">
         <g transform="scale(1)">
           <g>

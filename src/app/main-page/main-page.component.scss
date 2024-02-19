@@ -1,13 +1,17 @@
 .dashboard{
-  display: flex;
   justify-content: space-around;
-  align-content: flex-start;
-  flex-wrap: wrap;
 }
-.box {
-  max-height: 650px;
+.max-h-40rem {
+  max-height: 40rem !important;
+}
+
+.w-32 {
   width: 32%;
-  margin: 5px;
-  padding: 10px;
-  flex: 0 1 auto;
-  }
+}
+
+.w-100{
+  width: 100%;
+}
+.of-c{
+  object-fit: cover;
+}

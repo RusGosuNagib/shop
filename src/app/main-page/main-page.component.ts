@@ -13,7 +13,6 @@ import {SortingPipe} from "../common/sorting.pipe";
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.scss'
 })
-
 export class MainPageComponent implements OnInit {
 
   products$: Observable<ProductModel[]>;

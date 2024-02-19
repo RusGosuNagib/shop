@@ -27,3 +27,9 @@
   margin-top: -24px;
   cursor: pointer;
 }
+a, a:link, a:visited {
+  text-decoration: none;
+  color: #282828;
+  transition: all .2s ease-in;
+  cursor: pointer;
+}

@@ -7,7 +7,6 @@ import {UserModel} from "../models/user.model";
 @Injectable({
   providedIn: 'root',
 })
-
 export class AuthService {
   private _firebaseUrl = `${environment.firebaseUrlPassAuth}${environment.apiKey}`
 

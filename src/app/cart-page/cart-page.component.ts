@@ -5,13 +5,35 @@ import {CommonModule} from "@angular/common";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {OrderService} from "../common/order.service";
 import {OrderModel} from "../models/order.model";
+import {ButtonModule} from "primeng/button";
+import {ImageModule} from "primeng/image";
+import {SharedModule} from "primeng/api";
+import {TableModule} from "primeng/table";
+import {RouterLink} from "@angular/router";
+import {CardModule} from "primeng/card";
+import {InputGroupAddonModule} from "primeng/inputgroupaddon";
+import {InputGroupModule} from "primeng/inputgroup";
+import {InputTextModule} from "primeng/inputtext";
+import {InputMaskModule} from "primeng/inputmask";
+import {DropdownModule} from "primeng/dropdown";
 
 @Component({
   selector: 'app-cart-page',
   standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ButtonModule,
+    ImageModule,
+    SharedModule,
+    TableModule,
+    RouterLink,
+    CardModule,
+    InputGroupAddonModule,
+    InputGroupModule,
+    InputTextModule,
+    InputMaskModule,
+    DropdownModule
   ],
   templateUrl: './cart-page.component.html',
   styleUrl: './cart-page.component.scss'
@@ -23,6 +45,7 @@ export class CartPageComponent implements OnInit {
   form: FormGroup;
   submitted = false;
   added = '';
+  paymentType: { name: string; value: string; }[];
 
   /**
    * Constructor for creating an instance of the class.
@@ -35,17 +58,22 @@ export class CartPageComponent implements OnInit {
   ) {
   }
 
+
   /**
-   * Initialize the component and form
+   * Initializes the component and form.
    */
   ngOnInit(): void {
+    // Initialize payment type options
+    this.paymentType = [
+      {name: 'Карта', value: 'Card'},
+      {name: 'Наличные', value: 'Cash'},
+    ];
+
     // Initialize products in cart
     this.productsInCart = this.productService.productsInCart;
 
     // Calculate total price of products in cart
-    for (let index = 0; index < this.productsInCart.length; index++) {
-      this.totalPrice += +this.productsInCart[index].price;
-    }
+    this.totalPrice = this.productsInCart.reduce((total, product) => total + +product.price, 0);
 
     // Initialize form with default values and validators
     this.form = new FormGroup({
@@ -102,4 +130,5 @@ export class CartPageComponent implements OnInit {
     this.productsInCart.splice(this.productsInCart.indexOf(product), 1);
   }
 
+  protected readonly console = console;
 }

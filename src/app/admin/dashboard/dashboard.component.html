@@ -24,7 +24,7 @@
         <td>
           <p-image [src]="product.photo" [alt]="" width="100" [preview]="true"></p-image>
         </td>
-        <td>{{ product.price | currency:'RUB' }}</td>
+        <td> {{ product.price | currency:'₽' }}</td>
         <td>{{ product.type.name }}</td>
         <td>
           <p-button [routerLink]="['/admin','product', product.id,'edit']">Изменить</p-button>

@@ -40,7 +40,6 @@ export class OpenCloseComponent {
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
-
 export class DashboardComponent implements OnInit, OnDestroy {
 
   products: ProductModel[] = []
