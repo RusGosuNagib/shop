@@ -35,9 +35,7 @@ export const productReducer = createReducer(
 
 export const orderReducer= createReducer(
   orderInitialState,
-  on(OrderActions.loadOrders, (state) => {
-    console.log(state)
-    return state
-  }),
+  on(OrderActions.loadOrders, (state) => state),
+  on(OrderActions.successLoadOrders, (order) => order),
   on(OrderActions.createOrder, (state) => state)
 );

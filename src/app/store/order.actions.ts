@@ -5,10 +5,10 @@ export const OrderActions = createActionGroup({
   source: 'Order',
   events: {
     'Load Orders':  emptyProps(),
-    'Success Load Orders':  props<{ order: OrderModel }>(),
+    'Success Load Orders':  props<{ orders: OrderModel[] }>(),
     'Create Order': emptyProps(),
   }
 });
-OrderActions.loadOrders();
-OrderActions.successLoadOrders({order: {}});
 
+OrderActions.loadOrders();
+OrderActions.successLoadOrders({orders: []})

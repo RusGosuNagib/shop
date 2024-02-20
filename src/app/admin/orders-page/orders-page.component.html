@@ -1,7 +1,7 @@
 <p-card header="Dashboard of orders" [style]="{ width: '100%' }">
   <div *ngIf="orders$ | async as orders">
-    <div *ngIf="orders.length; else noOrders">
-
+    <div *ngIf="orders.length; else no_orders">
+{{orders$}}
 
       <p-table [value]="orders" [tableStyle]="{'min-width': '60rem'}">
         <ng-template pTemplate="header">
@@ -43,7 +43,7 @@
     </div>
   </div>
 
-  <ng-template #noOrders>
+  <ng-template #no_orders>
     <p class="text-center">No orders...</p>
   </ng-template>
 
