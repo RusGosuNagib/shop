@@ -9,6 +9,8 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideEffects } from '@ngrx/effects';
 import {ProductEffects} from "./store/product.effects";
 import {productReducer} from "./store";
+import {orderReducer} from "./store";
+import {OrderEffects} from "./store/order.effects";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,7 +20,8 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptors([AuthInterceptor])),
     provideStore(),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
-    provideEffects(ProductEffects),
-    provideState({name: 'products', reducer: productReducer})
+    provideEffects(ProductEffects, OrderEffects),
+    provideState({name: 'products', reducer: productReducer}),
+    provideState({name: 'orders', reducer: orderReducer})
 ]
 };
