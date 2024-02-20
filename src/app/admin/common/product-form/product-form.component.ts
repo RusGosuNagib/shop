@@ -1,7 +1,7 @@
 import {Component, forwardRef, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {ProductService} from "../../../common/product.service";
-import {switchMap} from "rxjs";
+import {Observable, switchMap} from "rxjs";
 import {FormControl, FormGroup, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ProductModel} from "../../../models/product.model";
 import {NgIf} from "@angular/common";
@@ -15,6 +15,8 @@ import {InputGroupAddonModule} from "primeng/inputgroupaddon";
 import {InputTextModule} from "primeng/inputtext";
 import {DropdownModule} from "primeng/dropdown";
 import {FileSelectEvent, FileUploadEvent, FileUploadModule} from "primeng/fileupload";
+import {createProduct, getProductById, updateProduct} from "../../../store/product.actions";
+import {Store} from "@ngrx/store";
 
 let photo: any;
 
@@ -45,6 +47,7 @@ let photo: any;
   ]
 })
 export class ProductFormComponent implements OnInit {
+
   form: FormGroup;
   product: ProductModel;
   submitted: boolean;
@@ -55,7 +58,9 @@ export class ProductFormComponent implements OnInit {
   typesOfProducts: { name: string; value: string; }[];
   protected readonly console = console;
   protected readonly Editor = Editor;
-  @Input() isEdit!: boolean;
+  product$: Observable<ProductModel> = this.store.select(state => state);
+
+  @Input() isEdit: boolean;
 
   /**
    * Initializes the class with dependencies.
@@ -63,15 +68,15 @@ export class ProductFormComponent implements OnInit {
    * @param route - The activated route object for accessing route information
    * @param productService - The service for product-related operations
    * @param router - The router object for navigation
+   * @param store
    */
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
-    private router: Router
+    private router: Router,
+    private store: Store<{ product: ProductModel }>
   ) {
   }
-
-
 
   /**
    * Initializes the component and sets up the form and product data.
@@ -84,8 +89,11 @@ export class ProductFormComponent implements OnInit {
       {name: 'Аксессуары', value: 'Accessories'},
     ];
 
+    let id = this.route.snapshot.paramMap.get('id');
     if (this.isEdit) {
       // Fetch the product data for editing
+      this.store.dispatch(getProductById({id: id}));
+
       this.route.params.pipe(switchMap(params => {
           this.prodId = params['id'];
           return this.productService.getById(params['id']);
@@ -151,22 +159,23 @@ export class ProductFormComponent implements OnInit {
     this.submitted = true;
 
     if (this.isEdit) {
+      this.store.dispatch(updateProduct({product: {
+          ...this.product,
+          id: this.prodId,
+          type: this.form.value.type,
+          title: this.form.value.title,
+          photo: this.uploadedFile,
+          info: this.form.value.info,
+          price: this.form.value.price,
+          date: new Date().toString()
+        }}));
       // Update the existing product
-      this.productService.updateProduct({
-        ...this.product,
-        id: this.prodId,
-        type: this.form.value.type,
-        title: this.form.value.title,
-        photo: this.uploadedFile,
-        info: this.form.value.info,
-        price: this.form.value.price,
-        date: new Date().toString()
-      }).subscribe(product => {
-        // Set the submitted flag to false after update
-        this.submitted = false;
-        // Navigate to the admin dashboard after successful update
-        this.router.navigate(['/admin', 'dashboard']);
-      });
+      // this.productService.updateProduct().subscribe(product => {
+      //   // Set the submitted flag to false after update
+      //   this.submitted = false;
+      //   // Navigate to the admin dashboard after successful update
+      //   this.router.navigate(['/admin', 'dashboard']);
+      // });
     } else {
       // Create a new product
       const product: ProductModel = {
@@ -177,14 +186,16 @@ export class ProductFormComponent implements OnInit {
         price: this.form.value.price,
         date: new Date().toString()
       };
-      this.productService.createProduct(product).subscribe(res => {
-          // Reset the form and mark it as not submitted
-          // this.form.reset()
-          // this.submitted = false
-          // // Navigate to the home page
-          // this.router.navigate(['/'])
-        }
-      )
+
+      this.store.dispatch(createProduct({product: product}));
+      // this.productService.createProduct(product).subscribe(res => {
+      //     // Reset the form and mark it as not submitted
+      //     // this.form.reset()
+      //     // this.submitted = false
+      //     // // Navigate to the home page
+      //     // this.router.navigate(['/'])
+      //   }
+      // )
     }
   }
 

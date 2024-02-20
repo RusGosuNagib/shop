@@ -1,8 +1,7 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router, RouterLink} from "@angular/router";
-import {ProductService} from "../../common/product.service";
 import {ProductModel} from "../../models/product.model";
-import {Subscription} from "rxjs";
+import {Observable} from "rxjs";
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {SearchPipe} from "../../common/search.pipe";
@@ -11,17 +10,8 @@ import {ButtonModule} from "primeng/button";
 import {InputTextModule} from "primeng/inputtext";
 import {ImageModule} from 'primeng/image';
 import {CardModule} from "primeng/card";
-
-export class OpenCloseComponent {
-  isOpen = true;
-
-  /**
-   * Toggles the isOpen property
-   */
-  toggle() {
-    this.isOpen = !this.isOpen;
-  }
-}
+import {Store} from "@ngrx/store";
+import {loadProducts, removeProduct} from "../../store/product.actions";
 
 @Component({
   selector: 'app-dashboard',
@@ -40,21 +30,20 @@ export class OpenCloseComponent {
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class DashboardComponent implements OnInit {
 
   products: ProductModel[] = []
-  pSub: Subscription;
-  rSub: Subscription;
   productName: string;
+  products$: Observable<ProductModel[]> = this.store.select(state => state.products);
 
   /**
    * Constructor for initializing the router and productService
    * @param router - The router for navigating between routes
-   * @param productService - The service for managing product data
+   * @param store - The service for hz
    */
   constructor(
     private router: Router,
-    private productService: ProductService,
+    private store: Store<{ products: ProductModel[] }>,
   ) {
   }
 
@@ -62,38 +51,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
    * Initialize the component
    */
   ngOnInit(): void {
-    // Subscribe to the product service to get all products
-    this.pSub = this.productService.getAll().subscribe(products => {
-      // Update the products property with the retrieved products
-      this.products = products;
-    })
-  }
-
-  /**
-   * Lifecycle hook that is called when the component is destroyed
-   */
-  ngOnDestroy(): void {
-    // Unsubscribe from the 'pSub' subscription if it exists
-    if (this.pSub) {
-      this.pSub.unsubscribe();
-    }
-    // Unsubscribe from the 'rSub' subscription if it exists
-    if (this.rSub) {
-      this.rSub.unsubscribe();
-    }
+    // Dispatch an action to load products
+    this.store.dispatch(loadProducts());
   }
 
   /**
    * Removes a product by ID
    * @param id - The ID of the product to remove
    */
-  remove(id: string) {
-    // Unsubscribe from previous subscription to prevent memory leaks
-    this.rSub = this.productService.removeProduct(id).subscribe(() => {
-      // Filter out the product with the matching ID
-      this.products = this.products.filter(product => product.id !== id)
-    })
+  remove(id: string): void {
+    this.store.dispatch(removeProduct({id: id}));
   }
 
-  protected readonly console = console;
 }
