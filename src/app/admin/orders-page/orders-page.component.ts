@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {OrderService} from "../../common/order.service";
-import {Subscription} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 import {Router} from "@angular/router";
 import {ProductService} from "../../common/product.service";
 import {CommonModule} from "@angular/common";
@@ -9,6 +9,11 @@ import {ImageModule} from "primeng/image";
 import {SharedModule} from "primeng/api";
 import {TableModule} from "primeng/table";
 import {CardModule} from "primeng/card";
+import {ProductModel} from "../../models/product.model";
+import {OrderModel} from "../../models/order.model";
+import {Store} from "@ngrx/store";
+import {loadProducts} from "../../store/product.actions";
+import {OrderActions} from "../../store/order.actions";
 
 
 @Component({
@@ -23,15 +28,19 @@ export class OrdersPageComponent implements OnInit, OnDestroy {
   orders: any[] = []
   pSub: Subscription;
   rSub: Subscription;
+  orders$: Observable<OrderModel[]> = this.store.select(state => state.orders);
+
 
   protected readonly console = console;
 
   /**
    * Constructor for initializing OrderService
    * @param orderService - the OrderService instance
+   * @param store
    */
   constructor(
     private orderService: OrderService,
+    private store: Store<{ orders: OrderModel[] }>,
   ) {
   }
 
@@ -39,12 +48,7 @@ export class OrdersPageComponent implements OnInit, OnDestroy {
    * Lifecycle hook that is called after Angular has initialized all data-bound properties of a directive.
    */
   ngOnInit(): void {
-    /**
-     * Subscribe to the order service to get all orders and update the component's orders property.
-     */
-    this.pSub = this.orderService.getAll().subscribe(orders => {
-      this.orders = orders;
-    })
+    this.store.dispatch(OrderActions.loadOrders());
   }
 
   /**

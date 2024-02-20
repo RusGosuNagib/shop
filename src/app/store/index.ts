@@ -1,4 +1,4 @@
-import { createReducer, on } from '@ngrx/store';
+import {ActionReducer, createReducer, on} from '@ngrx/store';
 import {
   createProduct,
   getProductById,
@@ -10,12 +10,14 @@ import {
   successUpdateProduct,
   updateProduct
 } from "./product.actions";
+import {OrderActions} from "./order.actions";
 import {ProductModel} from "../models/product.model";
+import {OrderModel} from "../models/order.model";
 //import { increment, decrement, reset } from './product.actions';
 
 export const initialState:ProductModel[] = [];
+export const orderInitialState:OrderModel[] = [];
 
-// @ts-ignore
 export const productReducer = createReducer(
   initialState,
   on(loadProducts, (state) => state),
@@ -28,4 +30,14 @@ export const productReducer = createReducer(
   on(updateProduct, (state, {product}) => [ product]),
   on(successUpdateProduct, (state, {product}) => [...state, product]),
 
+);
+
+
+export const orderReducer= createReducer(
+  orderInitialState,
+  on(OrderActions.loadOrders, (state) => {
+    console.log(state)
+    return state
+  }),
+  on(OrderActions.createOrder, (state) => state)
 );
