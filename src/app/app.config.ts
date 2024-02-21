@@ -8,9 +8,10 @@ import {provideState, provideStore} from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideEffects } from '@ngrx/effects';
 import {ProductEffects} from "./store/product.effects";
-import {productReducer} from "./store";
+import {cartReducer, productReducer} from "./store";
 import {orderReducer} from "./store";
 import {OrderEffects} from "./store/order.effects";
+import {CartEffects} from "./store/cart.effects";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -22,6 +23,7 @@ export const appConfig: ApplicationConfig = {
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     provideEffects(ProductEffects, OrderEffects),
     provideState({name: 'products', reducer: productReducer}),
-    provideState({name: 'orders', reducer: orderReducer})
+    provideState({name: 'orders', reducer: orderReducer}),
+    provideState({name: 'cart', reducer: cartReducer}),
 ]
 };

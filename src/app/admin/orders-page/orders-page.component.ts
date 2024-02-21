@@ -21,10 +21,7 @@ import {OrderActions} from "../../store/order.actions";
 })
 export class OrdersPageComponent implements OnInit {
 
-  // orders: any[] = []
-
   orders$: Observable<OrderModel[]> = this.store.select(state => state.orders);
-
 
   protected readonly console = console;
 
@@ -39,12 +36,13 @@ export class OrdersPageComponent implements OnInit {
   ) {
   }
 
-
   ngOnInit(): void {
     this.store.dispatch(OrderActions.loadOrders());
   }
 
   remove(id: string) {
+
+    this.store.dispatch(OrderActions.removeOrder({id}));
     // Unsubscribe to previous subscriptions
     // if (this.rSub) {
     //   this.rSub.unsubscribe();

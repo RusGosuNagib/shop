@@ -11,6 +11,9 @@ import Editor from "@ckeditor/ckeditor5-build-classic";
 import {CardModule} from "primeng/card";
 import {ButtonModule} from "primeng/button";
 import {SkeletonModule} from "primeng/skeleton";
+import {loadProducts} from "../store/product.actions";
+import {CartActions} from "../store/cart.actions";
+import {Store} from "@ngrx/store";
 
 @Component({
   selector: 'app-product-page',
@@ -37,10 +40,12 @@ export class ProductPageComponent implements OnInit {
    * Constructor for initializing ProductService and ActivatedRoute
    * @param productService - instance of ProductService
    * @param route - instance of ActivatedRoute
+   * @param store
    */
   constructor(
     private productService: ProductService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private store: Store<{ products: ProductModel[] }>,
   ) {
   }
 
@@ -60,7 +65,8 @@ export class ProductPageComponent implements OnInit {
    * @param product - The product to be added to the cart.
    */
   addToCart(product: ProductModel) {
-    this.productService.addProductToCart(product);
+    // this.productService.addProductToCart(product);
+    this.store.dispatch(CartActions.addToCart({product}));
   }
 
 

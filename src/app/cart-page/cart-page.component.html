@@ -1,7 +1,9 @@
-<div *ngIf="productsInCart.length>0; else empty">
+ <div *ngIf="products$ | async as products">
+    <div *ngIf="products.length; else empty">
+
   <h2 class="text-center">Ваш заказ:</h2>
 
-  <p-table [value]="productsInCart" [tableStyle]="{'min-width': '60rem'}">
+  <p-table [value]="products" [tableStyle]="{'min-width': '60rem'}">
 
     <ng-template pTemplate="body" let-product>
       <tr>
@@ -19,14 +21,14 @@
     </ng-template>
     <ng-template pTemplate="summary">
       <div class="flex align-items-center justify-content-between">
-        In total there are {{ productsInCart ? productsInCart.length : 0 }} products.
+        In total there are {{ products ? products.length : 0 }} products.
       </div>
     </ng-template>
   </p-table>
 
   <hr>
 
-  <b class="right">Total:{{ totalPrice }}</b>
+  <b class="right">Total:{{ totalPrice$ | async }}</b>
 
 
   <div *ngIf="added" class="text-center text-success">{{ added }}</div>
@@ -77,6 +79,7 @@
 
     </form>
   </p-card>
+</div>
 </div>
 
 <ng-template #empty>

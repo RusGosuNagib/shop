@@ -1,11 +1,9 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {catchError, EMPTY, exhaustMap, map} from "rxjs";
 import {OrderService} from "../common/order.service";
 import {OrderActions} from "./order.actions";
 import {OrderModel} from "../models/order.model";
-
-
 
 @Injectable()
 export class OrderEffects {
@@ -19,9 +17,19 @@ export class OrderEffects {
         ))
     )
   );
-
+  removeOrder = createEffect(() => this.actions$.pipe(
+      ofType(OrderActions.removeOrder),
+      map((action) => action.id),
+      exhaustMap((id) => this.orderService.removeOrder(id)
+        .pipe(
+          map(orders => OrderActions.successRemoveOrder({id})),
+          catchError(() => EMPTY)
+        ))
+    )
+  );
 
   constructor(
     private actions$: Actions,
-    private orderService: OrderService) {}
+    private orderService: OrderService) {
+  }
 }

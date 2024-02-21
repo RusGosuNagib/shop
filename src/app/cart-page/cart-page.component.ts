@@ -16,6 +16,9 @@ import {InputGroupModule} from "primeng/inputgroup";
 import {InputTextModule} from "primeng/inputtext";
 import {InputMaskModule} from "primeng/inputmask";
 import {DropdownModule} from "primeng/dropdown";
+import {Store} from "@ngrx/store";
+import {Observable} from "rxjs";
+import {selectCart, selectTotalPrice} from "../store/cart.selectors";
 
 @Component({
   selector: 'app-cart-page',
@@ -41,20 +44,23 @@ import {DropdownModule} from "primeng/dropdown";
 export class CartPageComponent implements OnInit {
 
   productsInCart: ProductModel[] = [];
-  totalPrice = 0;
   form: FormGroup;
   submitted = false;
   added = '';
   paymentType: { name: string; value: string; }[];
+  products$: Observable<ProductModel[]> = this.store.select(selectCart);
+  totalPrice$: Observable<number> = this.store.select(selectTotalPrice);
 
   /**
    * Constructor for creating an instance of the class.
    * @param productService - The product service for managing products.
    * @param orderService - The order service for managing orders.
+   * @param store
    */
   constructor(
     private productService: ProductService,
     private orderService: OrderService,
+    private store: Store<{ cart: ProductModel[] }>,
   ) {
   }
 
@@ -73,7 +79,6 @@ export class CartPageComponent implements OnInit {
     this.productsInCart = this.productService.productsInCart;
 
     // Calculate total price of products in cart
-    this.totalPrice = this.productsInCart.reduce((total, product) => total + +product.price, 0);
 
     // Initialize form with default values and validators
     this.form = new FormGroup({
@@ -100,7 +105,7 @@ export class CartPageComponent implements OnInit {
       phone: this.form.value.phone,
       address: this.form.value.address,
       payment: this.form.value.payment,
-      price: this.totalPrice,
+      price: +this.totalPrice$.valueOf(),
       date: new Date().toString(),
       products: this.productsInCart
     };
@@ -123,11 +128,9 @@ export class CartPageComponent implements OnInit {
    * @param product - The product to be removed from the cart
    */
   deleteFromCart(product: ProductModel) {
-    // Update the total price by subtracting the price of the removed product
-    this.totalPrice -= +product.price;
 
-    // Remove the product from the products in the cart
     this.productsInCart.splice(this.productsInCart.indexOf(product), 1);
+
   }
 
   protected readonly console = console;
