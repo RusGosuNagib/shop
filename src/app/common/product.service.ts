@@ -31,7 +31,7 @@ export class ProductService {
         map(result => {
           return {
             ...product,
-            id: result.name,
+            id: result.title,
             date: new Date(product.date),
           }
         }),
@@ -44,7 +44,7 @@ export class ProductService {
    */
   getAll(): Observable<ProductModel[]> {
     // Make an HTTP GET request to retrieve products from the database
-    return this.http.get<ProductRespModel>(`${environment.fbBDUrl}/products.json`)
+    return this.http.get<ProductRespModel>(`${environment.backendUrl + environment.backendPort + environment.backendUrlProduct}`)
       .pipe(map(res => {
         // Map the response object to an array of ProductModel with ids
         return Object.keys(res)

@@ -17,7 +17,7 @@ import {
 @Injectable()
 export class ProductEffects {
 
-  loadProduct$ = createEffect(() => this.actions$.pipe(
+  loadProducts$ = createEffect(() => this.actions$.pipe(
       ofType(loadProducts),
       exhaustMap(() => this.productService.getAll()
         .pipe(

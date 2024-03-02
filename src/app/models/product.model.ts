@@ -5,7 +5,6 @@ export class ProductModel {
   info?: string
   price?: string
   date?: string
-  name?: string
   product?: object
   id?: string
 }
