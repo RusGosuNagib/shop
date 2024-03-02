@@ -12,7 +12,7 @@ import {ProductService} from "../product.service";
 })
 export class MainLayoutComponent {
 
-  type = 'Tshirts'
+  type: number = 1
 
   /**
    * Constructor for creating an instance of the class
@@ -30,10 +30,10 @@ export class MainLayoutComponent {
    * Set the type of the product
    * @param type - The type of the product
    */
-  setType(type: string) {
+  setType(type: number) {
     this.type = type;
     // Redirect to the homepage with query param if the type is not 'Cart'
-    if (this.type !== 'Cart') {
+    if (this.type !== 99) {
       this.router.navigate(['/'], {
         queryParams: {
           type: this.type

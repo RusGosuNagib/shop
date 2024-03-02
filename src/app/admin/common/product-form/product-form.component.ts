@@ -51,11 +51,11 @@ export class ProductFormComponent implements OnInit {
   form: FormGroup;
   product: ProductModel;
   submitted: boolean;
-  private prodId: string;
+  private prodId: number;
   uploader: FileUpload;
   uploadedFile: string;
   isLoading: boolean = false;
-  typesOfProducts: { name: string; value: string; }[];
+  typesOfProducts: { name: string; value: number; }[];
   protected readonly console = console;
   protected readonly Editor = Editor;
   product$: Observable<ProductModel> = this.store.select(state => state);
@@ -84,12 +84,12 @@ export class ProductFormComponent implements OnInit {
   ngOnInit(): void {
     // Define the types of products
     this.typesOfProducts = [
-      {name: 'Футболки', value: 'Tshirts'},
-      {name: 'Обувь', value: 'Shoes'},
-      {name: 'Аксессуары', value: 'Accessories'},
+      {name: 'Футболки', value: 1},
+      {name: 'Обувь', value: 2},
+      {name: 'Аксессуары', value: 3},
     ];
 
-    let id = this.route.snapshot.paramMap.get('id');
+    let id = Number(this.route.snapshot.paramMap.get('id'));
     if (this.isEdit) {
       // Fetch the product data for editing
       this.store.dispatch(getProductById({id: id}));

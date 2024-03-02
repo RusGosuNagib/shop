@@ -9,8 +9,8 @@ import {map, Observable} from "rxjs";
 })
 export class ProductService {
 
-  private prodId: string;
-  type: string = 'Tshirts';
+  private prodId: number;
+  type: number = 1;
   productsInCart: ProductModel[] = [];
 
   /**
@@ -49,8 +49,7 @@ export class ProductService {
         // Map the response object to an array of ProductModel with ids
         return Object.keys(res)
           .map(key => ({
-            ...res[key],
-            id: key,
+            ...res[key]
           }))
       }))
   }
@@ -60,16 +59,16 @@ export class ProductService {
    * @param id - The ID of the product to retrieve
    * @returns An observable of the product model
    */
-  getById(id: string): Observable<ProductModel> {
+  getById(id: number): Observable<ProductModel> {
     // Set the product ID
     this.prodId = id;
 
     // Make an HTTP request to retrieve the product by ID
-    return this.http.get<ProductModel>(`${environment.fbBDUrl}/products/${id}.json`)
+    return this.http.get<ProductModel>(`${environment.backendUrl + environment.backendPort + environment.backendUrlProduct}/${id}`)
       .pipe(
         // Map the response and include the product ID
         map(res => {
-          return {...res, id: this.prodId};
+          return {...res};
         })
       );
   }
@@ -79,7 +78,7 @@ export class ProductService {
    * @param id - The ID of the product to be removed
    * @returns An observable that emits the removed product
    */
-  removeProduct(id: string): Observable<ProductModel> {
+  removeProduct(id: number): Observable<ProductModel> {
     const url = `${environment.fbBDUrl}/products/${id}.json`;
     return this.http.delete<ProductModel>(url);
   }
@@ -98,7 +97,7 @@ export class ProductService {
    * Set the type of the object.
    * @param {string} type - The type to be set.
    */
-  setType(type: string) {
+  setType(type: number) {
     this.type = type;
   }
 

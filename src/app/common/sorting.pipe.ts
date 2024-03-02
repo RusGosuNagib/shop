@@ -13,9 +13,9 @@ export class SortingPipe implements PipeTransform {
    * @param {string} type - The type to filter by.
    * @returns {ProductModel[]} - The filtered array of products.
    */
-  transform(products: ProductModel[], type: string = ''): ProductModel[] {
+  transform(products: ProductModel[], type: number = 0): ProductModel[] {
     return products.filter((product: ProductModel) => {
-      return product.type.value === type;
+      return product.type === type;
     });
   }
 

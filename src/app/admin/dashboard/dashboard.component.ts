@@ -59,7 +59,7 @@ export class DashboardComponent implements OnInit {
    * Removes a product by ID
    * @param id - The ID of the product to remove
    */
-  remove(id: string): void {
+  remove(id: number): void {
     this.store.dispatch(removeProduct({id: id}));
   }
 

@@ -71,4 +71,5 @@ export class ProductPageComponent implements OnInit {
 
 
   protected readonly Editor = Editor;
+  protected readonly console = console;
 }

@@ -1,12 +1,12 @@
 export class ProductModel {
-  type?: { name: string; value: string }
+  id?: number
+  type?:  number
   title?: string
   photo?: string
   info?: string
   price?: string
   date?: string
   product?: object
-  id?: string
 }
 
 export type ProductRespModel = {
