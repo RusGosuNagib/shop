@@ -56,7 +56,7 @@ export class OrderService {
    * @param id - The ID of the order to be removed
    * @returns An observable of the removed product model
    */
-  removeOrder(id: string): Observable<ProductModel> {
+  removeOrder(id: number): Observable<ProductModel> {
     return this.http.delete<ProductModel>(`${environment.backendUrl +environment.backendPort + environment.backendUrlOrder }/${id}`)
   }
 
