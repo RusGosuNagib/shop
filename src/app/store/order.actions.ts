@@ -7,14 +7,13 @@ export const OrderActions = createActionGroup({
     'Load Orders':  emptyProps(),
     'Success Load Orders':  props<{ orders: OrderModel[] }>(),
     'Create Order': emptyProps(),
-    'Remove Order': props<{ id: string }>(),
-    'Success Remove Order':  props<{ id: string }>(),
+    'Remove Order': props<{ id: number }>(),
+    'Success Remove Order':  props<{ id: number }>(),
   }
 });
 
 OrderActions.loadOrders();
 OrderActions.successLoadOrders({orders: []})
-OrderActions.removeOrder({id: ''})
-OrderActions.successRemoveOrder({id: ''})
-
+OrderActions.removeOrder({id : 0})
+OrderActions.successRemoveOrder({id: 0})
 

@@ -7,7 +7,7 @@ export class OrderModel {
   payment?: string
   price?: number
   date?: string
-  id?: string
+  id?: number
   products?: ProductModel[]
 }
 

@@ -8,7 +8,7 @@ import {UserModel} from "../models/user.model";
   providedIn: 'root',
 })
 export class AuthService {
-  private _firebaseUrl = `${environment.firebaseUrlPassAuth}${environment.apiKey}`
+  private _firebaseUrl = `${environment.backendUrl + environment.backendPort + environment.backendUrlPassAuth}`
 
   /**
    * Constructor for the class.
@@ -41,7 +41,7 @@ export class AuthService {
 
       // Store the expiration date and the token in the local storage
       localStorage.setItem('fb-token-exp', expiredDate.toString())
-      localStorage.setItem('fb-token', response.idToken)
+      localStorage.setItem('fb-token', response.secureToken)
     } else {
       // Clear the local storage if the response is empty
       localStorage.clear()

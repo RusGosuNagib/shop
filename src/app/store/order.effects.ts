@@ -20,11 +20,13 @@ export class OrderEffects {
   removeOrder = createEffect(() => this.actions$.pipe(
       ofType(OrderActions.removeOrder),
       map((action) => action.id),
-      exhaustMap((id) => this.orderService.removeOrder(id)
-        .pipe(
-          map(orders => OrderActions.successRemoveOrder({id})),
-          catchError(() => EMPTY)
-        ))
+      exhaustMap((id) => {
+        return this.orderService.removeOrder(id as number)
+          .pipe(
+            map(orders => OrderActions.successRemoveOrder({id})),
+            catchError(() => EMPTY)
+          );
+      })
     )
   );
 

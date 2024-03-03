@@ -3,5 +3,5 @@ export class UserModel {
   password: string
   returnSecureToken: boolean
   expiresIn?: string
-  idToken?: string
+  secureToken?: string
 }

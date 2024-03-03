@@ -40,19 +40,10 @@ export class OrdersPageComponent implements OnInit {
     this.store.dispatch(OrderActions.loadOrders());
   }
 
-  remove(id: string) {
+  remove(id: number) {
 
     this.store.dispatch(OrderActions.removeOrder({id}));
-    // Unsubscribe to previous subscriptions
-    // if (this.rSub) {
-    //   this.rSub.unsubscribe();
-    // }
 
-    // // Call the order service to remove the order
-    // this.rSub = this.orderService.removeOrder(id).subscribe(() => {
-    //   // Update the orders list after removing the order
-    //   this.orders = this.orders.filter(order => order.id !== id);
-    // });
   }
 
 }

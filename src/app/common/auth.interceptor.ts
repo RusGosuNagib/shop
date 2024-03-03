@@ -27,8 +27,8 @@ export const AuthInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, ne
   if (auth.isAuthenticated()) {
     // Add the authentication token to the request headers
     req = req.clone({
-      setParams: {
-        auth: auth.token
+      setHeaders: {
+        secure_token: auth.token
       }
     });
   }

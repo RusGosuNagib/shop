@@ -26,7 +26,7 @@ export class ProductService {
    * @returns An observable of the created product
    */
   createProduct(product: ProductModel) {
-    return this.http.post<ProductModel>(`${environment.fbBDUrl}/products.json`, product)
+    return this.http.post<ProductModel>(`${environment.backendUrl + environment.backendPort + environment.backendUrlProduct}/`, product)
       .pipe(
         map(result => {
           return {
@@ -79,7 +79,7 @@ export class ProductService {
    * @returns An observable that emits the removed product
    */
   removeProduct(id: number): Observable<ProductModel> {
-    const url = `${environment.fbBDUrl}/products/${id}.json`;
+    const url = `${environment.backendUrl + environment.backendPort + environment.backendUrlProduct}/${id}`;
     return this.http.delete<ProductModel>(url);
   }
 
@@ -89,7 +89,7 @@ export class ProductService {
    * @returns An observable of the updated product
    */
   updateProduct(product: ProductModel): Observable<ProductModel> {
-    const url = `${environment.fbBDUrl}/products/${product.id}.json`;
+    const url = `${environment.backendUrl + environment.backendPort + environment.backendUrlProduct}/${product.id}`;
     return this.http.patch<ProductModel>(url, product);
   }
 

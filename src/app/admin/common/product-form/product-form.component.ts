@@ -159,27 +159,21 @@ export class ProductFormComponent implements OnInit {
     this.submitted = true;
 
     if (this.isEdit) {
-      this.store.dispatch(updateProduct({product: {
-          ...this.product,
-          id: this.prodId,
-          type: this.form.value.type,
-          title: this.form.value.title,
-          photo: this.uploadedFile,
-          info: this.form.value.info,
-          price: this.form.value.price,
-          date: new Date().toString()
-        }}));
-      // Update the existing product
-      // this.productService.updateProduct().subscribe(product => {
-      //   // Set the submitted flag to false after update
-      //   this.submitted = false;
-      //   // Navigate to the admin dashboard after successful update
-      //   this.router.navigate(['/admin', 'dashboard']);
-      // });
-    } else {
-      // Create a new product
       const product: ProductModel = {
-        type: this.form.value.type,
+        id: this.prodId,
+        type: this.typesOfProducts.find((element) => element = this.form.value.type).value,
+        title: this.form.value.title,
+        photo: this.uploadedFile,
+        info: this.form.value.info,
+        price: this.form.value.price,
+        date: new Date().toString()
+      };
+
+      this.store.dispatch(updateProduct({product: product}));
+
+    } else {
+      const product: ProductModel = {
+        type: this.typesOfProducts.find((element) => element = this.form.value.type).value,
         title: this.form.value.title,
         photo: this.uploadedFile,
         info: this.form.value.info,
@@ -188,14 +182,6 @@ export class ProductFormComponent implements OnInit {
       };
 
       this.store.dispatch(createProduct({product: product}));
-      // this.productService.createProduct(product).subscribe(res => {
-      //     // Reset the form and mark it as not submitted
-      //     // this.form.reset()
-      //     // this.submitted = false
-      //     // // Navigate to the home page
-      //     // this.router.navigate(['/'])
-      //   }
-      // )
     }
   }
 
