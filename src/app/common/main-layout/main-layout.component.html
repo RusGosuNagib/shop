@@ -1,29 +1,22 @@
-<div class="header">
-  <a class="header__li" href="/">
-    <img src="assets/img.svg" alt="">
-  </a>
-  <div class="header_empty"></div>
-  <div class="header__li" routerLinkActive="active">
-    <a (click)="setType(1)">Футболки</a>
+<div (scroll)="onWindowScroll($event)">
+  <div class="header" id="header">
+    <a class="header__li" href="/">
+      <img src="assets/img.svg" alt="">
+    </a>
+    <div class="header_empty"></div>
+    <div class="header__li" routerLinkActive="active">
+      <a (click)="setType(1)">Футболки</a>
+    </div>
+    <div class="header__li">
+      <a (click)="setType(2)">Обувь</a>
+    </div>
+    <div class="header__li">
+      <a (click)="setType(3)">Аксессуары</a>
+    </div>
+    <div class="header__li">
+      <a (click)="setType(99)" routerLink="/cart">Корзина</a>
+    </div>
   </div>
-  <div class="header__li">
-    <a (click)="setType(2)">Обувь</a>
-  </div>
-  <div class="header__li">
-    <a (click)="setType(3)">Аксессуары</a>
-  </div>
-  <div class="header__li">
-    <a (click)="setType(99)" routerLink="/cart">Корзина</a>
-  </div>
+
+  <router-outlet></router-outlet>
 </div>
-
-<router-outlet></router-outlet>
-
-
-
-
-
-
-
-
-
