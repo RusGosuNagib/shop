@@ -47,7 +47,7 @@ a, a:link, a:visited {
   flex-direction: column;
   height: 6rem;
 }
-.header_container .header_button {
+.header_logo_container .header_button {
   float: inline-end;
   margin: 1rem;
 }
@@ -67,6 +67,8 @@ a, a:link, a:visited {
 }
 .header.mobile-active.menu_active {
   height: auto;
+  position: fixed;
+  background: #fff;
 }
 
 ::ng-deep .header_button button {
@@ -76,4 +78,15 @@ a, a:link, a:visited {
 }
 .menu_active .menu_items {
   flex-direction: column;
+}
+.header_container{
+  top: 0;
+  left: 0;
+  position: absolute;
+}
+.mobile-active {
+
+  margin: 0;
+  padding: 0;
+  width: 100%;
 }

@@ -31,18 +31,19 @@
   grid-template-columns: 2fr 1fr;
   grid-template-rows: 1fr;
   grid-template-areas:"left_section right_section";
+  height: 25rem;
 }
 .banner_section img{
   width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .left_section {
   grid-area: left_section;
-  height: 25rem;
   overflow: hidden;
 }
 .right_section {
   grid-area: right_section;
-  height: 25rem;
   overflow: hidden;
 
 }
@@ -65,19 +66,18 @@
   font-size: 3rem;
   text-align: center;
   padding: 1rem;
-  height: 9.5rem
 }
 .title_section .right_section {
   font-size: 1rem;
   padding: 2rem;
   font-style: italic;
-  height: 9.5rem
 }
 .text-section {
   grid-template-columns: 2fr 1fr;
   grid-template-rows: 1fr;
   grid-template-areas:"left_section right_section";
 }
-.font-bold.font-title.align-content-start.font-bold.font-title {
+.text_section .font-title {
   font-size: 3rem;
+  padding: 1rem 1rem 0 1rem;
 }

@@ -24,7 +24,7 @@ import {ButtonModule} from "primeng/button";
 export class MainLayoutComponent implements OnInit {
 
   type: number = 1
-  mobileActive: boolean = false
+  mobileMenuActive: boolean = false
   menuButton: HTMLElement;
   header: HTMLElement;
   menuItems: HTMLElement;
@@ -70,12 +70,12 @@ export class MainLayoutComponent implements OnInit {
 
   resizeHandler() {
     if (window.innerWidth < 1025) {
-      this.mobileActive = true;
+      this.mobileMenuActive = true;
       this.header.classList.add('mobile-active');
       this.menuButton.classList.remove('hidden');
 
     } else {
-      this.mobileActive = false;
+      this.mobileMenuActive = false;
       this.header.classList.remove('mobile-active');
       this.menuButton.classList.add('hidden');
       this.menuItems.classList.remove('hidden');
@@ -84,13 +84,12 @@ export class MainLayoutComponent implements OnInit {
 
   showMenu() {
     console.log('click')
-    if (this.mobileActive) {
+    if (this.mobileMenuActive) {
       this.header.classList.add('menu_active');
     }else {
       this.header.classList.remove('menu_active');
     }
-    this.mobileActive = !this.mobileActive;
-
+    this.mobileMenuActive = !this.mobileMenuActive;
   }
 
   /**
