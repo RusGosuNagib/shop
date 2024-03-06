@@ -1,24 +1,47 @@
 
 <div *ngIf="products$ | async as products" class="formgroup-inline dashboard">
   <div class="m-1 p-2" >
-    <img *ngIf="productService.type === 1" class="w-100" src="assets/ryan.jpg" alt="">
+    <img *ngIf="productService.type === 1" class="w-100" src="../../assets/banners/ryan.jpg" alt="">
 
-    <img *ngIf="productService.type === 2" class="w-100" src="assets/yeezy.jpg" alt="">
+    <img *ngIf="productService.type === 2" class="w-100" src="../../assets/banners/yeezy.jpg" alt="">
 
-    <img *ngIf="productService.type === 3" class="w-100" src="assets/gaga.jpg" alt="">
+    <img *ngIf="productService.type === 3" class="w-100" src="../../assets/banners/gaga.jpg" alt="">
   </div>
 
   <div class="product_tiles">
-  <app-product *ngFor="let product of products | sorting:productService.type" class="m-1 p-2 flex-initial"
-               [product]="product"></app-product></div>
+  <app-product *ngFor="let product of products.slice(0,8)| sorting:productService.type" class="m-1 p-2 flex-initial"
+               [product]="product"></app-product>
+  </div>
 
 </div>
-<div class="second_section">
+
+
+<div class="section title_section">
+  <div class="left_section font-bold font-title">
+    Lorem ipsum dolor
+  </div>
+  <div class="right_section">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vehicula ipsum accumsan rhoncus condimentum. Pellentesque at venenatis purus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nulla commodo nibh nisi, et tempor ipsum condimentum id. Etiam pulvinar dolor non tristique pharetra.
+  </div>
+</div>
+
+<div class="section banner_section">
     <div class="left_section">
-      <img src="https://static.wixstatic.com/media/ca2a5a_c8150b131534409881cbe3c4d36ff6ba.jpg/v1/fill/w_1000,h_631,al_c,q_85,enc_auto/ca2a5a_c8150b131534409881cbe3c4d36ff6ba.jpg">
+      <img src="./assets/banners/how-many-jeans-in-your-wardrobe.webp">
     </div>
     <div class="right_section">
-      <img src="https://static.wixstatic.com/media/ca2a5a_940416ccb18a434a87313f984bbdc39d.jpg/v1/fill/w_432,h_994,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/ca2a5a_940416ccb18a434a87313f984bbdc39d.jpg">
+      <img src="./assets/banners/2024-03-06%2010.44.57.jpg">
     </div>
 </div>
 
+<div class="section text_section">
+    <div class="font-bold font-title align-content-start font-bold font-title">
+      Lorem ipsum dolor sit amet.
+    </div>
+</div>
+<div *ngIf="products$ | async as products" class="formgroup-inline dashboard">
+<div class="product_tiles">
+  <app-product *ngFor="let product of products.slice(0,4)| sorting:productService.type" class="m-1 p-2 flex-initial"
+               [product]="product"></app-product>
+</div>
+</div>

@@ -35,15 +35,15 @@ export const AuthInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, ne
 
   // Return the observable of the HTTP event stream
   return next(req).pipe(
-    catchError(error => {
-      // Handle unauthorized error
-      if (error.status === 401) {
-        // Log out the user and navigate to the login page
-        auth.logout();
-        router.navigate(['/admin', 'login']);
-      }
-      // Throw a new error
-      return throwError(() => new Error(error));
-    })
+    // catchError(error => {
+    //   // Handle unauthorized error
+    //   if (error.status === 401) {
+    //     // Log out the user and navigate to the login page
+    //     auth.logout();
+    //     router.navigate(['/admin', 'login']);
+    //   }
+    //   // Throw a new error
+    //   return throwError(() => new Error(error));
+    // })
   );
 };
