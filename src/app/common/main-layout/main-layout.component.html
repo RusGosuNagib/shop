@@ -1,22 +1,28 @@
 <div (scroll)="onWindowScroll($event)">
   <div class="header" id="header">
-    <a class="header__li" href="/">
-      <img src="assets/img.svg" alt="">
-    </a>
+    <div class="header_container">
+      <div class="header_logo">
+        <img ngSrc="assets/img.svg" alt="" height="16" width="16">
+      </div>
+      <p-button id="menu-button" class="header_button hidden" icon="pi pi-bars"></p-button>
+    </div>
     <div class="header_empty"></div>
-    <div class="header__li" routerLinkActive="active">
-      <a (click)="setType(1)">Футболки</a>
-    </div>
-    <div class="header__li">
-      <a (click)="setType(2)">Обувь</a>
-    </div>
-    <div class="header__li">
-      <a (click)="setType(3)">Аксессуары</a>
-    </div>
-    <div class="header__li">
-      <a (click)="setType(99)" routerLink="/cart">Корзина</a>
-    </div>
+   <div id="menu-items" class="menu_items">
+     <div class="header__li" routerLinkActive="active">
+       <a (click)="setType(1)">Футболки</a>
+     </div>
+     <div class="header__li">
+       <a (click)="setType(2)">Обувь</a>
+     </div>
+     <div class="header__li">
+       <a (click)="setType(3)">Аксессуары</a>
+     </div>
+     <div class="header__li">
+       <a (click)="setType(99)" routerLink="/cart">Корзина</a>
+     </div>
+   </div>
   </div>
+
 
   <router-outlet></router-outlet>
 </div>

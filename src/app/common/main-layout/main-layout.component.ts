@@ -1,14 +1,15 @@
-import {Component, HostListener, Inject} from '@angular/core';
+import {Component, HostListener, Inject, OnInit} from '@angular/core';
 import {Router, RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
 import {AuthService} from "../auth.service";
 import {ProductService} from "../product.service";
-import {DOCUMENT} from "@angular/common";
+import {DOCUMENT, NgOptimizedImage} from "@angular/common";
 import {animate, state, style, transition, trigger} from "@angular/animations";
+import {ButtonModule} from "primeng/button";
 
 @Component({
   selector: 'app-main-layout',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, ButtonModule, NgOptimizedImage],
   templateUrl: './main-layout.component.html',
   styleUrl: './main-layout.component.scss',
   animations: [
@@ -20,9 +21,13 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
       ]
     )]
 })
-export class MainLayoutComponent {
+export class MainLayoutComponent implements OnInit {
 
   type: number = 1
+  mobileActive: boolean = false
+  menuButton: HTMLElement;
+  header: HTMLElement;
+  menuItems: HTMLElement;
 
   /**
    * Constructor for creating an instance of the class
@@ -38,6 +43,13 @@ export class MainLayoutComponent {
   }
 
   ngOnInit() {
+    this.menuButton = document.getElementById('menu-button');
+    this.header = document.getElementById('header');
+    this.menuItems = document.getElementById('menu-items');
+    this.menuButton.addEventListener('click', () => {
+      this.showMenu();
+    });
+    this.resizeHandler()
   }
 
   @HostListener('window:scroll', ['$event'])
@@ -51,6 +63,35 @@ export class MainLayoutComponent {
     }
   }
 
+  @HostListener('window:resize', ['$event'])
+  onWindowResize() {
+    this.resizeHandler()
+  }
+
+  resizeHandler() {
+    if (window.innerWidth < 1025) {
+      this.mobileActive = true;
+      this.header.classList.add('mobile-active');
+      this.menuButton.classList.remove('hidden');
+
+    } else {
+      this.mobileActive = false;
+      this.header.classList.remove('mobile-active');
+      this.menuButton.classList.add('hidden');
+      this.menuItems.classList.remove('hidden');
+    }
+  }
+
+  showMenu() {
+    console.log('click')
+    if (this.mobileActive) {
+      this.header.classList.add('menu_active');
+    }else {
+      this.header.classList.remove('menu_active');
+    }
+    this.mobileActive = !this.mobileActive;
+
+  }
 
   /**
    * Set the type of the product

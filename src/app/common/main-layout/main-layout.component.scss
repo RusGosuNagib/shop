@@ -3,6 +3,7 @@
   align-content: flex-start;
   width: 100%;
   height: 100px;
+  overflow: hidden;
 }
 .header__li {
   margin: 5px;
@@ -22,9 +23,7 @@
 
 .header img {
   width: 105px;
-  height: 90px;
-  text-align: left;
-  margin-top: -24px;
+  height: 6rem;
   cursor: pointer;
 }
 a, a:link, a:visited {
@@ -40,7 +39,41 @@ a, a:link, a:visited {
   box-shadow: 0 3px 12px 0 rgba(0,0,0,.08);
   position: fixed;
   top: 0;
-  height: 90px;
+  height: 6rem;
   width: 98.3%;
   margin: 0px 0.75rem;
+}
+.header.mobile-active {
+  flex-direction: column;
+  height: 6rem;
+}
+.header_container .header_button {
+  float: inline-end;
+  margin: 1rem;
+}
+
+.mobile-active .header_logo {
+  vertical-align: sub;
+  margin: 1rem;
+  display: contents;
+}
+.mobile-active .header_logo img {
+  padding: 0;
+  width: auto;
+  height: 6rem;
+}
+.menu_items {
+  display: flex;
+}
+.header.mobile-active.menu_active {
+  height: auto;
+}
+
+::ng-deep .header_button button {
+  color: #000000;
+  background: #ffffff;
+  border: 1px solid #f4f6f7;
+}
+.menu_active .menu_items {
+  flex-direction: column;
 }
