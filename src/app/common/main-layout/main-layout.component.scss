@@ -1,6 +1,4 @@
-.header_container {
-  width: 100%;
-}
+
 .header {
   display: flex;
   align-content: flex-start;
@@ -8,12 +6,14 @@
   height: 100px;
   overflow: hidden;
 }
+
 .header__li {
   margin: 5px;
   padding: 20px;
   flex: 0 1 auto;
 }
-.logo{
+
+.logo {
   flex: 0 1 200px;
   align-self: flex-start;
 }
@@ -29,6 +29,7 @@
   height: 6rem;
   cursor: pointer;
 }
+
 a, a:link, a:visited {
   text-decoration: none;
   color: #282828;
@@ -39,17 +40,19 @@ a, a:link, a:visited {
 
 .sticky {
   background: #fff;
-  box-shadow: 0 3px 12px 0 rgba(0,0,0,.08);
+  box-shadow: 0 3px 12px 0 rgba(0, 0, 0, .08);
   position: fixed;
   top: 0;
   height: 6rem;
   width: 98.3%;
   margin: 0px 0.75rem;
 }
+
 .header.mobile-active {
   flex-direction: column;
   height: 6rem;
 }
+
 .header_logo_container .header_button {
   float: inline-end;
   margin: 1rem;
@@ -60,18 +63,25 @@ a, a:link, a:visited {
   margin: 1rem;
   display: contents;
 }
+
 .mobile-active .header_logo img {
   padding: 0;
   width: auto;
   height: 6rem;
 }
+
 .menu_items {
   display: flex;
 }
+
 .header.mobile-active.menu_active {
   height: auto;
   position: fixed;
   background: #fff;
+  width: 90%;
+}
+.header.mobile-active.menu_active.sticky{
+  width: 100%;
 }
 
 ::ng-deep .header_button button {
@@ -79,14 +89,19 @@ a, a:link, a:visited {
   background: #ffffff;
   border: 1px solid #f4f6f7;
 }
+
 .menu_active .menu_items {
   flex-direction: column;
 }
-.header_container{
+
+.layout_container {
   top: 0;
   left: 0;
   position: absolute;
+  padding: 0 5%;
+  width: 100%;
 }
+
 .mobile-active {
 
   margin: 0;

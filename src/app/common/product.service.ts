@@ -64,7 +64,7 @@ export class ProductService {
     this.prodId = id;
 
     // Make an HTTP request to retrieve the product by ID
-    return this.http.get<ProductModel>(`${environment.backendUrl + environment.backendPort + environment.backendUrlProduct}/${id}`)
+    return this.http.get<ProductModel>(`${environment.backendUrl + environment.backendPort + environment.backendUrlProduct}/find/${id}`)
       .pipe(
         // Map the response and include the product ID
         map(res => {
