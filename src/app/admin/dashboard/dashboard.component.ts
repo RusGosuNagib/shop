@@ -12,6 +12,7 @@ import {ImageModule} from 'primeng/image';
 import {CardModule} from "primeng/card";
 import {Store} from "@ngrx/store";
 import {loadProducts, removeProduct} from "../../store/product.actions";
+import {ProductService} from "../../common/product.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -35,15 +36,17 @@ export class DashboardComponent implements OnInit {
   products: ProductModel[] = []
   productName: string;
   products$: Observable<ProductModel[]> = this.store.select(state => state.products);
-
+  typesOfProducts = this.productService.typesOfProducts;
   /**
    * Constructor for initializing the router and productService
    * @param router - The router for navigating between routes
-   * @param store - The service for hz
+   * @param store - The service for product-related operations
+   * @param productService
    */
   constructor(
     private router: Router,
     private store: Store<{ products: ProductModel[] }>,
+    private productService: ProductService,
   ) {
   }
 

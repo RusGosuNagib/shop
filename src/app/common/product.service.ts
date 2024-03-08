@@ -12,6 +12,11 @@ export class ProductService {
   private prodId: number;
   type: number = 1;
   productsInCart: ProductModel[] = [];
+  typesOfProducts = [
+    {name: 'Футболки', value: 1},
+    {name: 'Обувь', value: 2},
+    {name: 'Аксессуары', value: 3},
+  ];
 
   /**
    * Constructor for creating an instance of the class
@@ -107,6 +112,10 @@ export class ProductService {
    */
   addProductToCart(product: ProductModel) {
     this.productsInCart.push(product);
+  }
+
+  getPaginateProducts(limit: number, offset: number): Observable<ProductModel[]> {
+    return this.http.get<ProductModel[]>(`${environment.backendUrl + environment.backendPort + environment.backendUrlProduct}/paginate/?offset=${offset}&limit=${limit}&type=${this.type}`);
   }
 
 }

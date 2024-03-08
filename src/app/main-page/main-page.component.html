@@ -1,5 +1,5 @@
 
-<div *ngIf="products$ | async as products" class="formgroup-inline dashboard">
+<div *ngIf="firstProductsLine$ | async as products" class="formgroup-inline dashboard">
   <div class="m-1 p-2" >
     <img *ngIf="productService.type === 1" class="w-100" src="../../assets/banners/ryan.jpg" alt="">
 
@@ -9,7 +9,8 @@
   </div>
 
   <div class="product_tiles">
-  <app-product *ngFor="let product of products.slice(0,8)| sorting:productService.type" class="m-1 p-2 flex-initial"
+    {{console.log(products)}}
+  <app-product *ngFor="let product of products" class="m-1 p-2 flex-initial"
                [product]="product"></app-product>
   </div>
 
@@ -39,9 +40,9 @@
       Lorem ipsum dolor sit amet.
     </div>
 </div>
-<div *ngIf="products$ | async as products" class="formgroup-inline dashboard">
+<div *ngIf="secondProductsLine$ | async as products" class="formgroup-inline dashboard">
 <div class="product_tiles">
-  <app-product *ngFor="let product of products.slice(0,4)| sorting:productService.type" class="m-1 p-2 flex-initial"
+  <app-product *ngFor="let product of products" class="m-1 p-2 flex-initial"
                [product]="product"></app-product>
 </div>
 </div>

@@ -83,11 +83,7 @@ export class ProductFormComponent implements OnInit {
    */
   ngOnInit(): void {
     // Define the types of products
-    this.typesOfProducts = [
-      {name: 'Футболки', value: 1},
-      {name: 'Обувь', value: 2},
-      {name: 'Аксессуары', value: 3},
-    ];
+    this.typesOfProducts = this.productService.typesOfProducts;
 
     let id = Number(this.route.snapshot.paramMap.get('id'));
     if (this.isEdit) {
@@ -117,9 +113,12 @@ export class ProductFormComponent implements OnInit {
    * @param product - The product data to pre-fill the form with (optional, for editing mode).
    */
   setupForm(product?: ProductModel): void {
+    console.log(this.typesOfProducts)
+
+    const type = product ? this.typesOfProducts.find(item => item.value == product.type) : null;
     this.form = new FormGroup({
       photo: new FormControl(product ? product.photo : ''),
-      type: new FormControl(product ? product.type : null, Validators.required),
+      type: new FormControl(type, Validators.required),
       title: new FormControl(product ? product.title : null, Validators.required),
       info: new FormControl(product ? product.info : null, Validators.required),
       price: new FormControl(product ? product.price : null, Validators.required),
@@ -161,26 +160,24 @@ export class ProductFormComponent implements OnInit {
     if (this.isEdit) {
       const product: ProductModel = {
         id: this.prodId,
-        type: this.typesOfProducts.find((element) => element = this.form.value.type).value,
+        type: this.typesOfProducts.filter((element) => element === this.form.value.type)[0].value,
         title: this.form.value.title,
         photo: this.uploadedFile,
         info: this.form.value.info,
         price: this.form.value.price,
         date: new Date().toString()
       };
-
       this.store.dispatch(updateProduct({product: product}));
 
     } else {
       const product: ProductModel = {
-        type: this.typesOfProducts.find((element) => element = this.form.value.type).value,
+        type: this.typesOfProducts.filter((element) => element === this.form.value.type)[0].value,
         title: this.form.value.title,
         photo: this.uploadedFile,
         info: this.form.value.info,
         price: this.form.value.price,
         date: new Date().toString()
       };
-
       this.store.dispatch(createProduct({product: product}));
     }
   }

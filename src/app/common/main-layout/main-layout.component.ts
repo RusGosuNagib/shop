@@ -31,50 +31,67 @@ export class MainLayoutComponent implements OnInit {
 
   /**
    * Constructor for creating an instance of the class
-   * @param document
-   * @param router - the router for navigating between views
-   * @param productService - the service for managing product data
+   * @param document - the Document object
+   * @param router - the Router object for navigating between views
+   * @param productService - the ProductService object for managing product data
    */
   constructor(
-    @Inject(DOCUMENT) document: Document,
+    @Inject(DOCUMENT) private document: Document,
     private router: Router,
     private productService: ProductService,
   ) {
   }
 
+  // Initialize the component
   ngOnInit() {
+    // Get the menu button, header, and menu items elements
     this.menuButton = document.getElementById('menu-button');
     this.header = document.getElementById('header');
     this.menuItems = document.getElementById('menu-items');
+
+    // Add click event listener to the menu button to toggle the mobile menu
     this.menuButton.addEventListener('click', () => {
-      this.showMenu();
+      this.toggleMobileMenu();
     });
+
+    // Call the resize handler function
     this.resizeHandler()
   }
 
+  /**
+   * Handles the window scroll event to add or remove the 'sticky' class from the header element.
+   * @param $event - The scroll event object
+   */
   @HostListener('window:scroll', ['$event'])
   onWindowScroll($event: Event) {
-    if (window.pageYOffset > 99) {
+    if (window.scrollY > 99) {
       let element = document.getElementById('header');
-      element.classList.add('sticky');
+      element.classList.add('sticky'); // Add 'sticky' class when scroll position is greater than 99
     } else {
       let element = document.getElementById('header');
-      element.classList.remove('sticky');
+      element.classList.remove('sticky'); // Remove 'sticky' class when scroll position is less than or equal to 99
     }
   }
 
+  /**
+   * Handles the window resize event
+   */
   @HostListener('window:resize', ['$event'])
   onWindowResize() {
     this.resizeHandler()
   }
 
+  /**
+   * Handle the resizing of the window to adjust the mobile menu and header elements
+   */
   resizeHandler() {
     if (window.innerWidth < 1025) {
+      // Activate mobile menu
       this.mobileMenuActive = true;
       this.header.classList.add('mobile-active');
       this.menuButton.classList.remove('hidden');
-
     } else {
+      // Deactivate mobile menu
       this.mobileMenuActive = false;
       this.header.classList.remove('mobile-active');
       this.menuButton.classList.add('hidden');
@@ -82,11 +99,13 @@ export class MainLayoutComponent implements OnInit {
     }
   }
 
-  showMenu() {
-    console.log('click')
+  /**
+   * Toggles the mobile menu and updates the header class accordingly
+   */
+  toggleMobileMenu() {
     if (this.mobileMenuActive) {
       this.header.classList.add('menu_active');
-    }else {
+    } else {
       this.header.classList.remove('menu_active');
     }
     this.mobileMenuActive = !this.mobileMenuActive;
@@ -97,7 +116,9 @@ export class MainLayoutComponent implements OnInit {
    * @param type - The type of the product
    */
   setType(type: number) {
+    // Set the type of the product
     this.type = type;
+
     // Redirect to the homepage with query param if the type is not 'Cart'
     if (this.type !== 99) {
       this.router.navigate(['/'], {
@@ -105,10 +126,10 @@ export class MainLayoutComponent implements OnInit {
           type: this.type
         }
       });
+
       // Set the type in the productService
       this.productService.setType(this.type);
     }
   }
-
 
 }

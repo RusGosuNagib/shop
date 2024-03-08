@@ -8,7 +8,7 @@ import {UserModel} from "../models/user.model";
   providedIn: 'root',
 })
 export class AuthService {
-  private _firebaseUrl = `${environment.backendUrl + environment.backendPort + environment.backendUrlPassAuth}`
+  private authUrl = `${environment.backendUrl + environment.backendPort + environment.backendUrlPassAuth}`
 
   /**
    * Constructor for the class.
@@ -23,7 +23,7 @@ export class AuthService {
    * @returns Observable of UserModel
    */
   login(user: UserModel): Observable<UserModel> {
-    return this.http.post<UserModel>(this._firebaseUrl, user)
+    return this.http.post<UserModel>(this.authUrl, user)
       .pipe(
         tap(this.setToken)
       )
