@@ -113,8 +113,6 @@ export class ProductFormComponent implements OnInit {
    * @param product - The product data to pre-fill the form with (optional, for editing mode).
    */
   setupForm(product?: ProductModel): void {
-    console.log(this.typesOfProducts)
-
     const type = product ? this.typesOfProducts.find(item => item.value == product.type) : null;
     this.form = new FormGroup({
       photo: new FormControl(product ? product.photo : ''),

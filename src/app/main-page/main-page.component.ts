@@ -65,7 +65,6 @@ export class MainPageComponent implements OnInit {
    */
   updateSecondProductsLine() {
     this.secondProductsLine$ = this.productService.getPaginateProducts(this.limitSecondLine, this.limitFirstLine);
-    console.log(this.secondProductsLine$.pipe( map(data => data.length)))
   }
 
   /**

@@ -53,8 +53,13 @@ export class MainLayoutComponent implements OnInit {
     this.menuButton.addEventListener('click', () => {
       this.toggleMobileMenu();
     });
-
-    // Call the resize handler function
+    this.menuItems.addEventListener('click', (evt) => {
+      const element = evt.target as HTMLElement;
+      if (element.tagName === 'A') {
+        this.toggleMobileMenu();
+      }
+    });
+    // Call the resize handler functionv
     this.resizeHandler()
   }
 
