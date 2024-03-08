@@ -28,10 +28,18 @@
 
 <div class="section banner_section">
     <div class="left_section">
-      <img src="./assets/banners/how-many-jeans-in-your-wardrobe.webp">
+      <img *ngIf="productService.type === 1" src="../../assets/banners/how-many-jeans-in-your-wardrobe.webp" alt="">
+
+      <img *ngIf="productService.type === 2" src="../../assets/banners/2024-03-06%2010.42.22.jpg" alt="">
+
+      <img *ngIf="productService.type === 3" src="../../assets/banners/20.jpg" alt="">
     </div>
     <div class="right_section">
-      <img src="./assets/banners/2024-03-06%2010.44.57.jpg">
+      <img *ngIf="productService.type === 1" src="../../assets/banners/2024-03-06%2010.44.57.jpg" alt="">
+
+      <img *ngIf="productService.type === 2" src="../../assets/banners/2024-03-06%2010.44.43.jpg" alt="">
+
+      <img *ngIf="productService.type === 3" src="../../assets/banners/large_6_c548a3c9-ccde-4ebf-9ccc-f23f0e302325.jpg" alt="">
     </div>
 </div>
 
