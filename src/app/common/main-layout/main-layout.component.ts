@@ -9,7 +9,7 @@ import {ButtonModule} from "primeng/button";
 @Component({
   selector: 'app-main-layout',
   standalone: true,
-  imports: [RouterOutlet, RouterLinkActive, ButtonModule, NgOptimizedImage],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, ButtonModule, NgOptimizedImage],
   templateUrl: './main-layout.component.html',
   styleUrl: './main-layout.component.scss',
   animations: [
