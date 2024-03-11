@@ -9,7 +9,7 @@ import {ButtonModule} from "primeng/button";
 @Component({
   selector: 'app-main-layout',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, ButtonModule, NgOptimizedImage],
+  imports: [RouterOutlet, RouterLinkActive, ButtonModule, NgOptimizedImage],
   templateUrl: './main-layout.component.html',
   styleUrl: './main-layout.component.scss',
   animations: [
@@ -28,6 +28,7 @@ export class MainLayoutComponent implements OnInit {
   menuButton: HTMLElement;
   header: HTMLElement;
   menuItems: HTMLElement;
+  mobileWidth: boolean;
 
   /**
    * Constructor for creating an instance of the class
@@ -87,6 +88,7 @@ export class MainLayoutComponent implements OnInit {
     if (window.innerWidth < 1025) {
       // Activate mobile menu
       this.mobileMenuActive = true;
+      this.mobileWidth = true;
       this.header.classList.add('mobile_active');
       this.menuButton.classList.remove('hidden');
       this.menuItems.addEventListener('click', () => {
@@ -98,6 +100,7 @@ export class MainLayoutComponent implements OnInit {
       this.header.classList.remove('mobile_active');
       this.menuButton.classList.add('hidden');
       this.menuItems.classList.remove('hidden');
+      this.mobileWidth = false;
     }
   }
 
@@ -105,15 +108,16 @@ export class MainLayoutComponent implements OnInit {
    * Toggles the mobile menu and updates the header class accordingly
    */
   toggleMobileMenu() {
-    if (this.mobileMenuActive) {
+    if (this.mobileMenuActive && this.mobileWidth) {
       this.header.classList.add('menu_active');
     } else {
       this.header.classList.remove('menu_active');
     }
     this.mobileMenuActive = !this.mobileMenuActive;
   }
+
   closeMobileMenu() {
-      this.header.classList.remove('menu_active');
+    this.header.classList.remove('menu_active');
     this.mobileMenuActive = true
   }
 
