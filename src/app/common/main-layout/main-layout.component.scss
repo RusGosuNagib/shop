@@ -48,7 +48,7 @@ a, a:link, a:visited {
   margin: 0px 0.75rem;
 }
 
-.header.mobile-active {
+.header.mobile_active {
   flex-direction: column;
   height: 6rem;
 }
@@ -58,13 +58,13 @@ a, a:link, a:visited {
   margin: 1rem;
 }
 
-.mobile-active .header_logo {
+.mobile_active .header_logo {
   vertical-align: sub;
   margin: 1rem;
   display: contents;
 }
 
-.mobile-active .header_logo img {
+.mobile_active .header_logo img {
   padding: 0;
   width: auto;
   height: 6rem;
@@ -74,20 +74,20 @@ a, a:link, a:visited {
   display: flex;
 }
 
-.header.mobile-active.menu_active {
+.header.mobile_active.menu_active {
   height: auto;
   position: fixed;
   background: #fff;
   width: 90%;
 }
-.header.mobile-active.menu_active.sticky{
+.header.mobile_active.menu_active.sticky{
   width: 100%;
 }
 
 ::ng-deep .header_button button {
   color: #000000;
   background: #ffffff;
-  border: 1px solid #f4f6f7;
+  border: 1px solid #dddfe0;
 }
 
 .menu_active .menu_items {
@@ -102,9 +102,11 @@ a, a:link, a:visited {
   width: 100%;
 }
 
-.mobile-active {
-
+.mobile_active {
   margin: 0;
   padding: 0;
   width: 100%;
+}
+div#header {
+  z-index: 1;
 }

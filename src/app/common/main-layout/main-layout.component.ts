@@ -53,12 +53,6 @@ export class MainLayoutComponent implements OnInit {
     this.menuButton.addEventListener('click', () => {
       this.toggleMobileMenu();
     });
-    this.menuItems.addEventListener('click', (evt) => {
-      const element = evt.target as HTMLElement;
-      if (element.tagName === 'A') {
-        this.toggleMobileMenu();
-      }
-    });
     // Call the resize handler functionv
     this.resizeHandler()
   }
@@ -93,12 +87,15 @@ export class MainLayoutComponent implements OnInit {
     if (window.innerWidth < 1025) {
       // Activate mobile menu
       this.mobileMenuActive = true;
-      this.header.classList.add('mobile-active');
+      this.header.classList.add('mobile_active');
       this.menuButton.classList.remove('hidden');
+      this.menuItems.addEventListener('click', () => {
+        this.closeMobileMenu();
+      });
     } else {
       // Deactivate mobile menu
       this.mobileMenuActive = false;
-      this.header.classList.remove('mobile-active');
+      this.header.classList.remove('mobile_active');
       this.menuButton.classList.add('hidden');
       this.menuItems.classList.remove('hidden');
     }
@@ -114,6 +111,10 @@ export class MainLayoutComponent implements OnInit {
       this.header.classList.remove('menu_active');
     }
     this.mobileMenuActive = !this.mobileMenuActive;
+  }
+  closeMobileMenu() {
+      this.header.classList.remove('menu_active');
+    this.mobileMenuActive = true
   }
 
   /**

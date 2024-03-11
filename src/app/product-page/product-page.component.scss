@@ -1,7 +1,7 @@
 p-card {
   width: 100%;
 }
-.grid-container{
+.grid-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
@@ -15,4 +15,13 @@ p-card {
 img {
   width: 100%;
   max-width: 450px;
+}
+.grid-container {
+  display: table-row;
+}
+::ng-deep button {
+  color: #000000;
+  background: #ffffff;
+  border: 1px solid #dddfe0;
+  margin: 1rem 0;
 }
